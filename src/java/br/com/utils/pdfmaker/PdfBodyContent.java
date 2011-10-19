@@ -222,7 +222,12 @@ public class PdfBodyContent {
 
                                     cell1 = new PdfPCell();
                                     cell1.setBorder(Rectangle.NO_BORDER);
-                                    cell1.addElement(new Phrase(pac.getPacInIdade().toString(),smallNormal8));
+                                    if(pac != null && pac.getPacInIdade() != null){
+                                        cell1.addElement(new Phrase(pac.getPacInIdade().toString(),smallNormal8));
+                                    }else{
+                                        cell1.addElement(new Phrase("NI",smallNormal8));
+                                    }
+                                    
                                     cell1.setPadding(0);
                                     cell1.setPaddingLeft(5f);
                                     contentTable.addCell(cell1);

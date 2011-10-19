@@ -62,6 +62,16 @@ public class LabExame implements Serializable{
 
     private List<LabExameMaterial> listLabExameMaterials;
 
+    public LabExame() {
+    }
+
+    public LabExame(String exaStCodigo) {
+        this.exaStCodigo = exaStCodigo;
+    }
+    
+    
+    
+
     @OneToMany(mappedBy = "exaStCodigo")
     public List<LabExameMaterial> getListLabExameMaterials() {
       

@@ -72,6 +72,13 @@ public class LabUnidade implements Serializable {
 
     @OneToMany(mappedBy="uniStCodigo")
     private List<LabUsuario> listLabUsuario;
+
+    public LabUnidade() {
+    }
+
+    public LabUnidade(String uniStCodigo) {
+        this.uniStCodigo = uniStCodigo;
+    }
     
     
 

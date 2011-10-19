@@ -20,9 +20,10 @@ import javax.persistence.ManyToOne;
 public class LabDetalheRequisicaoPK implements Serializable {
 
     @Id
-    @ManyToOne
-    @JoinColumn(name="REQ_ST_CODIGO")
-    private LabRequisicao reqStCodigo;
+//    @ManyToOne
+//    @JoinColumn(name="REQ_ST_CODIGO")
+    @Column(name="REQ_ST_CODIGO")
+    private String reqStCodigo;
     @Id
      @ManyToOne
      @JoinColumn(name="EXA_ST_CODIGO")
@@ -39,13 +40,15 @@ public class LabDetalheRequisicaoPK implements Serializable {
         this.exaStCodigo = exaStCodigo;
     }
 
-    public LabRequisicao getReqStCodigo() {
+    public String getReqStCodigo() {
         return reqStCodigo;
     }
 
-    public void setReqStCodigo(LabRequisicao reqStCodigo) {
+    public void setReqStCodigo(String reqStCodigo) {
         this.reqStCodigo = reqStCodigo;
     }
+
+    
 
    
     

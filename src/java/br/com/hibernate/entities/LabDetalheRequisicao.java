@@ -42,9 +42,10 @@ public class LabDetalheRequisicao  implements Serializable {
 
 
     @Id
-    @ManyToOne
-    @JoinColumn(name = "REQ_ST_CODIGO")
-     private LabRequisicao reqStCodigo;
+//    @ManyToOne
+//    @JoinColumn(name = "REQ_ST_CODIGO")
+    @Column(name = "REQ_ST_CODIGO")
+     private String reqStCodigo;
     @Id
     @ManyToOne
     @JoinColumn(name = "EXA_ST_CODIGO")
@@ -323,7 +324,7 @@ public class LabDetalheRequisicao  implements Serializable {
 
     
 
-    public LabDetalheRequisicao(LabRequisicao reqStCodigo, LabExame exaStCodigo, String seqStCodigo, String uniStCodigo, String derStUnidadeEx, String morStCodigo, String setStCodigo, String equStCodigo, String obsStCodigo, String pexStCodigo, String amoStCodigo, String legStCodigo, String legStCodigoFat, String tapStCodigo, String tabStCodigo, Character derChUrgente, Character derChLiberacaoAutomatica, Character derChAutomatico, Integer derInRepeticao, String derStDiluicao, Character derChNaoNecessario, Integer derInFlag, Integer derInEnvioLis, Character derChParcial, Character derChRepetir, String derStAutorizacao, Date derDtEntradaMat, Date derHREntradaMat, Character derChTrouxeMat, Float derFlValorCh, Float derFlQtDeCh, Date derDtDataFatura, Date derHrHoraFatura, Date derDtDataPrevistaEntrega, Date derHrHoraPrevistaEntrega, String lotStCodigo, String usuStCodigo, Character derChInterface, String metStCodigo,Timestamp  emvDtValidade, Date resDtValidade, Integer derInMapaSeq, String grpStCodigo, String apoStCodigo, String frlCodigo, Integer derInLaudoSeq, Float derFlConvenio, Float derFlDesconto, Float derFlAcrescimo, Character derChVlDiferenciado, String usuStCodigoAss, Character derChFatura, Character derChImpresso, Character derChIncluidoAposConf, String derStObsRepeticao, Character derChEtiqueta, Long derInCodigo, Integer derInValidadeRes, String recStCodigo, Long sorInCodigo, Integer derInVertical, Integer derInHorizontal, String pfeStCodigo, Integer derInViasImpressas, Character derChNovaColeta, String derStVolume, String derStOrdemItegracao, Character derChOmiteCad, Date reqDtCadastro, String matStCodigo, String derStGuia, String derStMaterial, Date derDtAssinatura, Date derDtFatura, Character derChEnvioOla, Date derDtImpressao, Character derChEspecial, Character derChEnviadoHis, String sisStCodigo, String derStUnidadeAss, String cntStCodigo, String reqStCodigoLis, Date derDtDataTransporte, Long reqInCodigo, String oriStCodigo, String conStCodigo, Long equInCodigo, Date derDtColeta, Date derHrColeta, Character derChRestricao, String depStCodigo, String subStSequencia, Character derChFaturaExterno, Integer derInTempo, Character derChColetado, Date derDtLastUpdate, String derStSeqIntegracao, Character derChEnviadoRegLab, Character derChTipo, String derStProcedimentoAlt, String regStCodigo) {
+    public LabDetalheRequisicao(String reqStCodigo, LabExame exaStCodigo, String seqStCodigo, String uniStCodigo, String derStUnidadeEx, String morStCodigo, String setStCodigo, String equStCodigo, String obsStCodigo, String pexStCodigo, String amoStCodigo, String legStCodigo, String legStCodigoFat, String tapStCodigo, String tabStCodigo, Character derChUrgente, Character derChLiberacaoAutomatica, Character derChAutomatico, Integer derInRepeticao, String derStDiluicao, Character derChNaoNecessario, Integer derInFlag, Integer derInEnvioLis, Character derChParcial, Character derChRepetir, String derStAutorizacao, Date derDtEntradaMat, Date derHREntradaMat, Character derChTrouxeMat, Float derFlValorCh, Float derFlQtDeCh, Date derDtDataFatura, Date derHrHoraFatura, Date derDtDataPrevistaEntrega, Date derHrHoraPrevistaEntrega, String lotStCodigo, String usuStCodigo, Character derChInterface, String metStCodigo,Timestamp  emvDtValidade, Date resDtValidade, Integer derInMapaSeq, String grpStCodigo, String apoStCodigo, String frlCodigo, Integer derInLaudoSeq, Float derFlConvenio, Float derFlDesconto, Float derFlAcrescimo, Character derChVlDiferenciado, String usuStCodigoAss, Character derChFatura, Character derChImpresso, Character derChIncluidoAposConf, String derStObsRepeticao, Character derChEtiqueta, Long derInCodigo, Integer derInValidadeRes, String recStCodigo, Long sorInCodigo, Integer derInVertical, Integer derInHorizontal, String pfeStCodigo, Integer derInViasImpressas, Character derChNovaColeta, String derStVolume, String derStOrdemItegracao, Character derChOmiteCad, Date reqDtCadastro, String matStCodigo, String derStGuia, String derStMaterial, Date derDtAssinatura, Date derDtFatura, Character derChEnvioOla, Date derDtImpressao, Character derChEspecial, Character derChEnviadoHis, String sisStCodigo, String derStUnidadeAss, String cntStCodigo, String reqStCodigoLis, Date derDtDataTransporte, Long reqInCodigo, String oriStCodigo, String conStCodigo, Long equInCodigo, Date derDtColeta, Date derHrColeta, Character derChRestricao, String depStCodigo, String subStSequencia, Character derChFaturaExterno, Integer derInTempo, Character derChColetado, Date derDtLastUpdate, String derStSeqIntegracao, Character derChEnviadoRegLab, Character derChTipo, String derStProcedimentoAlt, String regStCodigo) {
         this.reqStCodigo = reqStCodigo;
         this.exaStCodigo = exaStCodigo;
         this.seqStCodigo = seqStCodigo;
@@ -438,13 +439,15 @@ public class LabDetalheRequisicao  implements Serializable {
         this.exaStCodigo = exaStCodigo;
     }
 
-    public LabRequisicao getReqStCodigo() {
+    public String getReqStCodigo() {
         return reqStCodigo;
     }
 
-    public void setReqStCodigo(LabRequisicao reqStCodigo) {
+    public void setReqStCodigo(String reqStCodigo) {
         this.reqStCodigo = reqStCodigo;
     }
+
+    
 
     public Timestamp getEmvDtValidade() {
         return emvDtValidade;
@@ -1481,7 +1484,7 @@ public class LabDetalheRequisicao  implements Serializable {
 
 
 
-         return new LabDetalheRequisicao(lrq ,
+         return new LabDetalheRequisicao(lrq.getReqStCodigo() ,
                  le,
                  "01",
                  lu.getUniStCodigo(),
@@ -1600,11 +1603,13 @@ public class LabDetalheRequisicao  implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 37 * hash + (this.reqStCodigo.getReqStCodigo() != null ? this.reqStCodigo.getReqStCodigo().hashCode() : 0);
-        hash = 37 * hash + (this.exaStCodigo.getExaStCodigo() != null ? this.exaStCodigo.getExaStCodigo().hashCode() : 0);
-        hash = 37 * hash + (this.seqStCodigo != null ? this.seqStCodigo.hashCode() : 0);
+        hash = 83 * hash + (this.reqStCodigo != null ? this.reqStCodigo.hashCode() : 0);
+        hash = 83 * hash + (this.exaStCodigo != null ? this.exaStCodigo.hashCode() : 0);
+        hash = 83 * hash + (this.seqStCodigo != null ? this.seqStCodigo.hashCode() : 0);
         return hash;
     }
+
+    
 
    
 }

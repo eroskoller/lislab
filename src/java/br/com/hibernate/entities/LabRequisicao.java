@@ -116,8 +116,8 @@ public class LabRequisicao implements Serializable{
     @Column(name="ALO_IN_CODIGO")
     private Long aloInCodigo;
 
-//    @Column(name="SOL_ST_ESTADO")
-//    private String solStEstado;
+    @Column(name="SOL_ST_ESTADO")
+    private String solStEstado;
     
     @Column(name="REQ_DT_CADASTRO")
     @Temporal(javax.persistence.TemporalType.DATE)
@@ -137,7 +137,7 @@ public class LabRequisicao implements Serializable{
     @Column(name="REQ_ST_LEITO")
     private String reqStLeito;
     @Column(name="REQ_CH_PRECADASTRO")
-    private char reqChPrecadastro;
+    private Character reqChPrecadastro;
     @Column(name="REQ_ST_DUM")
     private String reqStDUM;
     @ManyToOne
@@ -258,6 +258,16 @@ public class LabRequisicao implements Serializable{
     @Transient
     private LabColetor buscaLabColetor;
 
+    public LabRequisicao() {
+    }
+
+    public LabRequisicao(Long reqInCodigo, String reqStCodigo) {
+        this.reqInCodigo = reqInCodigo;
+        this.reqStCodigo = reqStCodigo;
+    }
+
+    
+    
   
 
     public String getColStCodigo() {
@@ -325,6 +335,9 @@ public class LabRequisicao implements Serializable{
 
     @Transient
     public List<LabDetalheRequisicao> getListLabDetalheRequisicaoFiltrado() {
+//        if(this.reqInCodigo != null){
+//            listLabDetalheRequisicaoFiltrado = OracleHelper.getListOfObjectByKeyEq(LabDetalheRequisicao.class, "reqStCodigo", this.reqStCodigo, "reqStCodigo", true);
+//        }
         return listLabDetalheRequisicaoFiltrado;
     }
 
@@ -503,11 +516,11 @@ public class LabRequisicao implements Serializable{
         this.reqChOcorrencia = reqChOcorrencia;
     }
 
-    public char getReqChPrecadastro() {
+    public Character getReqChPrecadastro() {
         return reqChPrecadastro;
     }
 
-    public void setReqChPrecadastro(char reqChPrecadastro) {
+    public void setReqChPrecadastro(Character reqChPrecadastro) {
         this.reqChPrecadastro = reqChPrecadastro;
     }
 
@@ -770,6 +783,16 @@ public class LabRequisicao implements Serializable{
     public void setUsuStCodigoEtiqueta(String usuStCodigoEtiqueta) {
         this.usuStCodigoEtiqueta = usuStCodigoEtiqueta;
     }
+
+    public String getSolStEstado() {
+        return solStEstado;
+    }
+
+    public void setSolStEstado(String solStEstado) {
+        this.solStEstado = solStEstado;
+    }
+    
+    
 
     @Override
     public boolean equals(Object obj) {
