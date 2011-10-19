@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+
+    <property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
+    <property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
+    
+    <property name="hibernate.connection.url">jdbc:oracle:thin:@//10.200.200.11:1521/clabdb</property> 
+<!--    <property name="hibernate.connection.url">jdbc:oracle:thin:@//182.202.50.162:1521/geslab</property> -->
+    
+    <!--<property name="hibernate.connection.url">jdbc:oracle:thin:@//191.168.1.206:9093/CLABHP</property>  191.168.1.205:1521  191.168.1.206:9093    191.168.1.206:1521-->
+    <property name="hibernate.connection.username">cielab</property>
+<!--<property name="hibernate.connection.username">geslab</property>-->
+<!--    <property name="hibernate.connection.password">lab</property>-->
+<property name="hibernate.connection.password">lab</property>
+
+
+    <property name="connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property>
+    <property name="hibernate.c3p0.acquire_increment">2</property>
+    <property name="hibernate.c3p0.min_size">4</property>
+    <property name="hibernate.c3p0.idle_test_period">100</property>
+    <property name="hibernate.c3p0.max_size">100</property>
+    <property name="hibernate.c3p0.max_statements">0</property>
+    <property name="hibernate.c3p0.timeout">100</property>
+
+
+
+<!--    
+    <property name="hibernate.show_sql">true</property>
+    <property name="hibernate.format_sql">true</property>
+    <property name="use_sql_comments">true</property>-->
+
+
+
+    <mapping class="br.com.hibernate.entities.LabUsuario"/>
+    <mapping class="br.com.hibernate.entities.LabUnidade"/>
+    <mapping class="br.com.hibernate.entities.LabAgenda"/>
+    <mapping class="br.com.hibernate.entities.LabAgendaLocal"/>
+    <mapping class="br.com.hibernate.entities.LabOrigem"/>
+    <mapping class="br.com.hibernate.entities.LabConvenio"/>
+    <mapping class="br.com.hibernate.entities.LabConvenioUnidade"/>
+    <mapping class="br.com.hibernate.entities.LabLocal"/>
+    <mapping class="br.com.hibernate.entities.LabRegras"/>
+    <mapping class="br.com.hibernate.entities.LabUnidade"/>
+    <mapping class="br.com.hibernate.entities.LabPaciente"/>
+    <mapping class="br.com.hibernate.entities.LabAgendaPaciente"/>
+    <mapping class="br.com.hibernate.entities.LabCid"/>
+    <mapping class="br.com.hibernate.entities.LabProfissao"/>
+    <mapping class="br.com.hibernate.entities.LabRequisicao"/>
+    <mapping class="br.com.hibernate.entities.LabSolicitante"/>
+    <mapping class="br.com.hibernate.entities.LabSistema"/>
+    <mapping class="br.com.hibernate.entities.LabColetor"/>
+    <mapping class="br.com.hibernate.entities.LabLegenda"/>
+    <mapping class="br.com.hibernate.entities.LabAgendaPacienteExame"/>
+    <mapping class="br.com.hibernate.entities.LabExame"/>
+    <mapping class="br.com.hibernate.entities.LabMaterial"/>
+    <mapping class="br.com.hibernate.entities.LabMaterialColeta"/>
+    <mapping class="br.com.hibernate.entities.LabObservacoes"/>
+    <mapping class="br.com.hibernate.entities.LabEstado"/>
+    <mapping class="br.com.hibernate.entities.LabDetalheRequisicao"/>
+    <mapping class="br.com.hibernate.entities.LabUsuarioUnidade"/>
+    <mapping class="br.com.hibernate.entities.LabSetor"/>
+    <mapping class="br.com.hibernate.entities.LabPerfilUsuario"/>
+    <mapping class="br.com.hibernate.entities.LabModulo"/>
+    <mapping class="br.com.hibernate.entities.LabExameGrupo"/>
+    <mapping class="br.com.hibernate.entities.LabExameUnidade"/>
+    <mapping class="br.com.hibernate.entities.LabMotivoRepeticao"/>
+    <mapping class="br.com.hibernate.entities.LabExameMaterial"/>
+    <mapping class="br.com.hibernate.entities.LabExameDependente"/>
+    <mapping class="br.com.hibernate.entities.LabSubSetor"/>
+    <mapping class="br.com.hibernate.entities.LabMapTriagem"/>
+    <mapping class="br.com.hibernate.entities.LabGrupoTriagem"/>
+    <mapping class="br.com.hibernate.entities.LabResultados"/>
+    <mapping class="br.com.hibernate.entities.LabConfigIngresso"/>
+    <mapping class="br.com.hibernate.entities.LabUnidadeMedida"/>
+    <mapping class="br.com.hibernate.entities.LabUsuarioPosto"/>
+    <mapping class="br.com.hibernate.entities.LabExameMetodoVersao"/>
+
+  </session-factory>
+</hibernate-configuration>

@@ -1,0 +1,538 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package com.hibernate.util;
+
+import com.hibernate.beans.DoadorHiber;
+import com.hibernate.beans.PRADoador;
+import com.hibernate.beans.PRAReceptor;
+import com.hibernate.beans.ReceptorHiber;
+import com.hibernate.beans.TipagemDoadorHLAHiber;
+import com.hibernate.beans.TipagemRecepHLAHiber;
+import java.util.*;
+import org.hibernate.Criteria;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
+
+/**
+ *
+ * @author eros
+ */
+public class HibernateHelperFacesOriginal {
+
+   static Session session;
+
+    public static Session getSessionDude(){
+
+        if(session == null){
+        return session = HibernateUtilFaces.getCurrentSession4Faces();
+        }else{  
+            return session;
+        }
+    }
+
+    public static void openHiberSession(){
+
+        if(session == null){
+            session = HibernateUtilFaces.getCurrentSession4Faces();
+        }
+
+    }
+
+    public static void closeSession(){
+        if(session != null){
+            session.close();
+
+        }
+    }
+
+    public static void addObject(Object obj){
+        Session session2 = null;
+        session2 = getSessionDude();
+        session2.beginTransaction();
+        session2.saveOrUpdate(obj);
+        session2.getTransaction().commit();
+        session2.close();
+        
+    }
+
+    public static void addListObjects(List list){
+        if(list != null && list.size() > 0){
+            for(int i = 0; i < list.size(); i ++){
+                addObject(list.get(i));
+            }
+        }else{
+            System.out.println("List is 0 or Null");
+        }
+    }
+
+    public static Object getObject(Class clazz,long id){
+        session = getSessionDude();
+        session.beginTransaction();
+        Object obj  =   session.get(clazz, id);
+        session.getTransaction().commit();
+        
+        return obj;
+    }
+
+     public static ReceptorHiber getReceptorHiberByNomeRGCPF(String nome, String rg, String cpf){
+             List list = new ArrayList();
+            session = getSessionDude();
+
+
+         if(nome != null && rg != null && cpf != null){
+
+                Query q = session.createQuery("from ReceptorHiber r where r.receptorNome = '"+nome+"'  and r.receptorRG = '"+rg+"' and r.receptorCPF = '"+cpf+"' ");
+                list = q.list();
+                Transaction t = session.beginTransaction();
+                t.commit();
+
+                if(list != null && list.size() > 0){
+                    return (ReceptorHiber) list.get(0);
+                }else{
+                    return null;
+                }
+                
+                
+         }else if(nome != null && rg != null){
+             Query q = session.createQuery("from ReceptorHiber r where r.receptorNome = '"+nome+"'  and r.receptorRG = '"+rg+"' " );
+                list = q.list();
+                Transaction t = session.beginTransaction();
+                t.commit();
+                
+                if(list != null && list.size() > 0){
+                    return (ReceptorHiber) list.get(0);
+                }else{
+                    return null;
+                }
+
+         }else if(nome != null && rg != null){
+             Query q = session.createQuery("from ReceptorHiber r where r.receptorNome = '"+nome+"' " +
+                        " and r.receptorCPF = '"+cpf+"' ");
+                list = q.list();
+                Transaction t = session.beginTransaction();
+                t.commit();
+                
+                if(list != null && list.size() > 0){
+                    return (ReceptorHiber) list.get(0);
+                }else{
+                    return null;
+                }
+         }else{
+                return null;
+         }
+
+
+      
+     }
+     public static ReceptorHiber getReceptorHiberCPF(String cpf){
+             List list = new ArrayList();
+             session = getSessionDude();
+
+              if(cpf != null){
+
+                    cpf = cpf.trim();
+
+                    Query q = session.createQuery("from ReceptorHiber r where r.receptorCPF = '"+cpf+"' ");
+                    list = q.list();
+                    Transaction t = session.beginTransaction();
+                    t.commit();
+
+                    if(list != null && list.size() > 0){
+                        return (ReceptorHiber) list.get(0);
+                    }else{
+                        return null;
+                    }
+
+
+             }
+         return null;
+     }
+
+
+
+      public static DoadorHiber getDoadorHiberCPF(String cpf){
+             List list = new ArrayList();
+             session = getSessionDude();
+
+              if(cpf != null){
+
+                    cpf = cpf.trim();
+
+                    Query q = session.createQuery("from DoadorHiber d where d.doadorCPF = '"+cpf+"' ");
+                    list = q.list();
+                    Transaction t = session.beginTransaction();
+                    t.commit();
+
+                    if(list != null && list.size() > 0){
+                        return (DoadorHiber) list.get(0);
+                    }else{
+                        return null;
+                    }
+
+
+             }
+         return null;
+     }
+
+
+
+
+    
+    
+    public static List getReceptorHiberList(){
+
+
+
+        List list = new ArrayList();
+        session = getSessionDude();
+        Query q = session.createQuery("from ReceptorHiber r where r.receptorId != null");
+        list = q.list();
+        Transaction t = session.beginTransaction();
+        t.commit();
+        
+        return list;
+    }
+
+
+    public static List getDoadorHiberList(){
+
+
+
+        List list = new ArrayList();
+        session = getSessionDude();
+        Query q = session.createQuery("from DoadorHiber r where r.doadorId != null");
+        list = q.list();
+        Transaction t = session.beginTransaction();
+        t.commit();
+        
+        return list;
+    }
+
+
+    public static void updateObject(Object obj){
+        session = getSessionDude();
+        session.beginTransaction();
+        session.update(obj);
+        session.getTransaction().commit();
+        
+    }
+
+    public static void updateObjectList(List list){
+       
+        if(list != null && list.size() > 0){
+            for(int i = 0; i < list.size(); i ++){
+                updateObject(list.get(i));
+            }
+        }else{
+            System.out.println("List is empty or 0");
+        }
+    }
+
+    public static void mergeObject(Object obj){
+        session = getSessionDude();
+        session.beginTransaction();
+        session.merge(obj);
+        session.getTransaction().commit();
+        
+    }
+
+    public static void mergeObjectList(List list){
+       
+        if(list != null && list.size() > 0){
+            for(int i = 0; i < list.size(); i ++){
+                mergeObject(list.get(i));
+            }
+        }else{
+            System.out.println("List is null o 0");
+        }
+    }
+
+
+     public static void saveObject(Object obj){
+        session = getSessionDude();
+        session.beginTransaction();
+        session.save(obj);
+        session.getTransaction().commit();
+        
+    }
+
+
+     public static void saveObjectList(List list){
+
+        if(list != null && list.size() > 0){
+            for(int i = 0; i < list.size(); i ++){
+                saveObject(list.get(i));
+            }
+        }else{
+            System.out.println("List is null o 0");
+        }
+    }
+
+
+    public void deleteObject(Object obj){
+        session = getSessionDude();
+        session.beginTransaction();
+        
+        session.delete(obj);
+        session.getTransaction().commit();
+       
+    }
+
+
+
+
+    
+    public void deleteObjectList(List list){
+        if(list != null && list.size() > 0){
+            for(int i = 0; i < list.size(); i ++){
+                deleteObject(list.get(i));
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+     static  public Object getFirstMatchUser(String login,String pass) {
+
+	    List result = new ArrayList();
+	    session = getSessionDude();
+//	    Session session = sessionFactory.openSession();
+	    org.hibernate.Query q = session.createQuery("from UserHiber u where u.userLogin = :name and u.userPass = :pass");
+	    q.setString("name", login);
+	    q.setString("pass", pass);
+
+	    result = q.list();
+	    Transaction tx = session.beginTransaction();
+
+
+	   	tx.commit();
+
+        
+
+	    if (result != null && result.size() > 0) {
+	        return result.get(0);
+	      }
+
+	    return null;
+	  }
+
+
+ static  public java.util.List getListDataByKey( Class classBean, String strKey, Object value){
+
+    java.util.List result = new java.util.ArrayList();
+    session = getSessionDude();
+
+    Transaction tx = session.beginTransaction();
+
+    Criteria criteria =
+        session.createCriteria(classBean);
+    if (strKey != null) {
+      criteria.add(Restrictions.like(strKey, value));
+    }
+    result = criteria.list();
+
+    tx.commit();
+
+    
+
+    return result;
+  }
+  static  public java.util.List getListData(Class classBean){
+      List result = new ArrayList();
+      session = getSessionDude();
+      Transaction tx = session.beginTransaction();
+      Criteria criteria = session.createCriteria(classBean);
+      result = criteria.list();
+
+      return result;
+  }
+
+ static  public Object getObjectDataRestrictions( Class classBean, String strKey, Object value){
+
+    java.util.List result = new java.util.ArrayList();
+    session = getSessionDude();
+
+    Transaction tx = session.beginTransaction();
+
+    Criteria criteria =
+        session.createCriteria(classBean);
+    if (strKey != null) {
+      criteria.add(Restrictions.like(strKey, value));
+    }
+    result = criteria.list();
+
+    tx.commit();
+
+    
+    
+
+    return result.get(0);
+  }
+
+  static  public List getListDataRestrictions( Class classBean, String strKey, Object value){
+
+    java.util.List result = new java.util.ArrayList();
+    session = getSessionDude();
+
+    Transaction tx = session.beginTransaction();
+
+    Criteria criteria =
+        session.createCriteria(classBean);
+    if (strKey != null) {
+      criteria.add(Restrictions.like(strKey, value));
+    }
+    result = criteria.list();
+
+    tx.commit();
+
+
+
+
+    return result;
+  }
+
+
+  public static TipagemDoadorHLAHiber getLastTipDoador(DoadorHiber doador){
+
+    java.util.List result = new java.util.ArrayList();
+    session = getSessionDude();
+
+
+
+    Transaction tx = session.beginTransaction();
+
+    Criteria criteria =
+        session.createCriteria(TipagemDoadorHLAHiber.class);
+
+    if(doador.getDoadorId() != null){
+     criteria.add(Restrictions.like("doadorFK", doador));
+    }
+
+    result = criteria.list();
+    int control;
+    if(result.size()>0){
+        control = result.size() + 1;
+        return (TipagemDoadorHLAHiber) result.get(0);
+    }
+
+    tx.commit();
+
+
+      return null;
+  }
+
+
+  public static TipagemRecepHLAHiber getLastTipReceptor(ReceptorHiber receptor){
+
+    java.util.List result = new java.util.ArrayList();
+    session = getSessionDude();
+
+
+
+    Transaction tx = session.beginTransaction();
+
+    Criteria criteria =
+        session.createCriteria(TipagemRecepHLAHiber.class);
+
+    if(receptor.getReceptorId() != null){
+     criteria.add(Restrictions.like("receptorFK", receptor));
+    }
+
+    result = criteria.list();
+    int control;
+    if(result.size() > 0) {
+    control = result.size();
+    return (TipagemRecepHLAHiber) result.get(0);
+    }
+
+    tx.commit();
+
+
+      return null;
+
+
+
+
+  }
+
+
+  public static PRADoador getLastPRADoador(DoadorHiber doador){
+
+
+    java.util.List result = new java.util.ArrayList();
+    session = getSessionDude();
+
+
+
+    Transaction tx = session.beginTransaction();
+
+    Criteria criteria =
+        session.createCriteria(PRADoador.class);
+
+    if(doador.getDoadorId() != null){
+     criteria.add(Restrictions.like("doadorFK", doador));
+    }
+
+    result = criteria.list();
+    int control;
+    if(result.size()> 0){
+        control = result.size();
+        
+        return (PRADoador) result.get(0);
+    }
+
+    tx.commit();
+
+
+      return null;
+
+
+  }
+    public static PRAReceptor getLastPRAReceptor(ReceptorHiber receptor){
+
+
+    java.util.List result = new java.util.ArrayList();
+    session = getSessionDude();
+
+
+
+    Transaction tx = session.beginTransaction();
+
+    Criteria criteria =
+        session.createCriteria(PRAReceptor.class);
+
+    if(receptor.getReceptorId() != null){
+     criteria.add(Restrictions.like("receptorFK", receptor));
+    }
+
+    result = criteria.list();
+    int control ;
+
+    if(result.size()>0){
+        control = result.size() + 1;
+        return (PRAReceptor) result.get(0);
+    }
+
+    
+
+    tx.commit();
+
+
+      return null;
+
+
+  }
+
+
+
+}
