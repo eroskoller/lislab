@@ -20,9 +20,14 @@ import br.com.hibernate.entities.LabUnidade;
 import br.com.hibernate.utils.OracleHelper;
 
 
+import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.Rectangle;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
 import java.io.FileNotFoundException;
@@ -50,46 +55,70 @@ public class PdfRelMakerPendencias {
         private  static Document makePdfPendencia(String pdfName,Date dtIncio , Date dtFinal,List<LabRequisicao> listRequisicao) 
                 throws FileNotFoundException, DocumentException, Exception{
             
+//            int intNo_BORDER = Rectangle.NO_BORDER;
+            
             if(dtIncio != null && dtFinal != null &&
                     (dtIncio.before(dtFinal)) || dtIncio.equals(dtFinal)  && 
                                 listRequisicao != null && !listRequisicao.isEmpty()){
                 
-                    float flA4MaxHeigh = 300f;//PageSize.A4.getHeight();
+                    float flA4MaxHeigh = 800f;//PageSize.A4.getHeight();
                     float flPdfHeigh = flA4MaxHeigh;
                     
                     Document document=new Document(PageSize.A4,0,0,2,2);
                     PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(pdfName));
-                    document.open();
+                   document.open();
                     
-                    PdfBodyContent.addMetaData(document);
-                    PdfBodyContent.addTitlePage(document,dtIncio,dtFinal,"Unidade Tamboré","NI/NI");
-                    PdfBodyContent.makeTablesHeader(document);
+                   
+                   
                     
-                    for(LabRequisicao lr : listRequisicao){
+                            Double dMaxPages = 25d;
                         
-                        if(lr.getListLabDetalheRequisicaoFiltrado() != null && !lr.getListLabDetalheRequisicaoFiltrado().isEmpty()){
+                           document = PdfBodyContent.addMetaData(document);
+                           double dPages = listRequisicao.size()/dMaxPages;
+                           Double dPagesCeil = Math.ceil(dPages);
+                           String sPages = dPagesCeil.toString().substring(0, dPagesCeil.toString().length()-2);
+                           Integer iPages = 1;
+                           
+                           document.add(PdfBodyContent.addTitlePage(dtIncio,dtFinal,"Unidade",iPages.toString()+"/"+sPages ));
+                           document.add(PdfBodyContent.makeTablesHeader());
                             
-                                if(document.getPageSize().getHeight()<= flPdfHeigh){
-
-                                    PdfBodyContent.makePdfContentOneByOne(lr, document);
-
-                                }else{
-//                                    document.newPage();
-//                                    document.newPage();
-//                                    writer.setPageEmpty(false);
-                                    PdfBodyContent.addMetaData(document);
-                                    PdfBodyContent.addTitlePage(document,dtIncio,dtFinal,"Criando Nova Pagina"," new Page/new Page");
-                                    PdfBodyContent.makeTablesHeader(document);
-                                    flPdfHeigh = flPdfHeigh + flA4MaxHeigh;
-                                }
-
-                        }
                         
+                        int reqs4Pages = dMaxPages.intValue();
+                            
+                            for(int i = 0 ; i < listRequisicao.size(); i ++){
+                                
+                                    LabRequisicao lr = listRequisicao.get(i);
+                                  
+                                    
+                                        if(lr.getListLabDetalheRequisicaoFiltrado() != null && !lr.getListLabDetalheRequisicaoFiltrado().isEmpty()){
+
+                                                    document.add(PdfBodyContent.makePdfContentOneByOne(lr));
+                                                    document.add(PdfBodyContent.makePdfPTable4ListaExames(lr));
+                                                    
+                                                    
+                                                    if(i >= reqs4Pages){
+                                                        document.newPage();
+                                                        writer.setPageEmpty(false);
+                                                        document = PdfBodyContent.addMetaData(document);
+                                                        ++iPages;
+                                                        document.add(PdfBodyContent.addTitlePage(dtIncio,dtFinal,"Unidade",iPages.toString()+"/"+sPages ));
+                                                        document.add(PdfBodyContent.makeTablesHeader());
+                                                        flPdfHeigh = flPdfHeigh+flA4MaxHeigh;
+                                                        reqs4Pages = reqs4Pages+dMaxPages.intValue();
+                                                    }
+                                                    
+                                                    
+                                        }
+                                        
+                                                
+                                        
                         
                     }
                     
+                  
                     
                     
+                    document.close();
                     return document;
                     
             }
@@ -99,12 +128,16 @@ public class PdfRelMakerPendencias {
         private static List<LabRequisicao> grabListLabRequisicaosWithReqFilterAndLabDetFilter(Date dtInicio,Date dtFinal,Map<String,Object> mapAnds4Req,String field4OrsReq,List<Object> listOrs4Req,
                 Map<String,Object> mapAnds4Det,String field4OrsDet,List<Object> listOrs4Det){
             
+            long comeco = new Date().getTime();
+            
             List<LabRequisicao> listReq = 
                     OracleHelper.getListObjectsByAnds_Ors_Dates(LabRequisicao.class, mapAnds4Req, field4OrsReq, listOrs4Req, "reqDtCadastro", dtInicio, dtFinal);
-            
+            long fim = new Date().getTime();
+            System.out.println("Tempo gasto p lista de LabRequisicoes: "+(new Long((fim-comeco)/1000)));
+            List<LabRequisicao>  listReqRetorno;
             if(listReq != null &&
                     ! listOrs4Req.isEmpty()){
-                
+                comeco = new Date().getTime();
                 for(LabRequisicao lr : listReq){
                     mapAnds4Det.put("reqStCodigo", lr.getReqStCodigo());
                     List<LabDetalheRequisicao> listDr = OracleHelper.getListObjectsByAnds_Ors(LabDetalheRequisicao.class, mapAnds4Det, field4OrsDet, listOrs4Det); 
@@ -112,23 +145,42 @@ public class PdfRelMakerPendencias {
                         lr.setListLabDetalheRequisicaoFiltrado(listDr);
                     }
                 }
+                fim = new Date().getTime();
+                System.out.println("Tempo gasto p lista de LabDetalheRequisicoes: "+(new Long((fim-comeco)/1000)));
+                if(listReq != null){
+                    listReqRetorno = new ArrayList<LabRequisicao>(listReq.size());
+                    
+                    for(LabRequisicao lr : listReq){
+                        if(lr.getListLabDetalheRequisicaoFiltrado() != null &&
+                               lr.getListLabDetalheRequisicaoFiltrado().size()>0 ){
+                            listReqRetorno.add(lr);
+                        }
+                    }
+                    return listReqRetorno;
+                }
+                 
                 
             }
-            return listReq;
+            return null;
         }
         
         
         public static synchronized  Document geraPdfPendencias(String pdfName,Date dtInicio,Date dtFinal,Map<String,Object> mapAnds4Req,String field4OrsReq,List<Object> listOrs4Req,
                 Map<String,Object> mapAnds4Det,String field4OrsDet,List<Object> listOrs4Det){
             
-                    if(pdfName != null && dtInicio  != null && dtFinal  != null && mapAnds4Req != null && !mapAnds4Req.isEmpty() && listOrs4Req != null && ! listOrs4Req.isEmpty() 
-                           && mapAnds4Det != null && ! mapAnds4Det.isEmpty() && field4OrsDet  != null && listOrs4Det != null && !listOrs4Det.isEmpty()){
+                    if(pdfName != null && dtInicio  != null && dtFinal  != null && mapAnds4Req != null && !mapAnds4Req.isEmpty() && listOrs4Req != null 
+                           && mapAnds4Det != null && ! mapAnds4Det.isEmpty() && field4OrsDet  != null && listOrs4Det != null){
 
                         try {
                             
                             List<LabRequisicao> listReq = grabListLabRequisicaosWithReqFilterAndLabDetFilter(dtInicio, dtFinal, mapAnds4Req, field4OrsReq, listOrs4Req, mapAnds4Det, field4OrsDet, listOrs4Det);
-
-                            return makePdfPendencia(pdfName, dtInicio, dtFinal, listReq);
+                            
+                            if(listReq != null && !listReq.isEmpty()){
+                               return  makePdfPendencia(pdfName, dtInicio, dtFinal, listReq);
+                            }else{
+                                return  null;
+                            }
+                            
 
                         } catch (FileNotFoundException ex) {
                             Logger.getLogger(PdfRelMakerPendencias.class.getName()).log(Level.SEVERE, null, ex);
@@ -157,31 +209,58 @@ public class PdfRelMakerPendencias {
 //                                System.out.println(PageSize.A4.getHeight()); 
                     
                                     Calendar dtInicio = Calendar.getInstance();
-                                    dtInicio.add(Calendar.HOUR_OF_DAY, -9);
+                                    dtInicio.add(Calendar.DAY_OF_YEAR, -5);
+//                                    dtInicio.add(Calendar.HOUR_OF_DAY, -4);
                                     Calendar dtFinal = Calendar.getInstance();
+                                    String uniStCodigo = "SPS";
+                                    String oriStCodigo = "000001";
 //                                    dtFinal.add(Calendar.HOUR, -8);
                                     Map<String,Object> mapAnds4Req = new HashMap<String, Object>();
 //                                    mapAnds4Req.put("reqStCodigo", "1139365702");
-                                    mapAnds4Req.put("uniStCodigo", new LabUnidade("UJA"));
-                                    mapAnds4Req.put("solStEstado", "RJ");
-                                    mapAnds4Req.put("reqChPrecadastro", new Character('S'));
+//                                    mapAnds4Req.put("legStCodigo", "007");
+                                    mapAnds4Req.put("uniStCodigo",uniStCodigo);
+                                    mapAnds4Req.put("oriStCodigo",oriStCodigo);
+//                                    mapAnds4Req.put("locStCodigo",uniStCodigo);
+//                                    mapAnds4Req.put("uniStCodigo",uniStCodigo);
+//                                    mapAnds4Req.put("solStEstado", "RJ");
+//                                    mapAnds4Req.put("reqChPrecadastro", new Character('S'));
+//                                    mapAnds4Req.put("reqChEtiqueta", new Character('S'));
+                                    
                                     
                                     List listOrs4Req = new ArrayList ();
-                                    listOrs4Req.add(new LabUnidade("UJA"));
+                                    listOrs4Req.add("001");
+                                    listOrs4Req.add("002");
+                                    listOrs4Req.add("003");
+                                    listOrs4Req.add("004");
+                                    listOrs4Req.add("005");
+                                    listOrs4Req.add("006");
+                                    listOrs4Req.add("007");
+                                    listOrs4Req.add("008");
+//                                    listOrs4Req.add("016");
                                     
                                     Map<String,Object> mapAnds4Det = new HashMap<String, Object>();
+                                    mapAnds4Det.put("uniStCodigo", uniStCodigo);
+                                       mapAnds4Det.put("oriStCodigo", oriStCodigo);
 //                                    mapAnds4Det.put("exaStCodigo", new LabExame("URI"));
-                                    mapAnds4Det.put("legStCodigoFat", "CON");
+//                                    mapAnds4Det.put("legStCodigo", "007");
                                     
                                     List listOrs4Det = new ArrayList ();
-                                    listOrs4Det.add("UJA");
+                                    listOrs4Det.add("001");
+                                    listOrs4Det.add("002");
+//                                    listOrs4Det.add("003");
+                                    listOrs4Det.add("004");
+//                                    listOrs4Det.add("005");
+//                                    listOrs4Det.add("006");
+                                    listOrs4Det.add("007");
+                                    listOrs4Det.add("008");
+//                                    listOrs4Det.add("016");
                                     
                                     Document doc = geraPdfPendencias("firstPdftest.pdf",
                                             dtInicio.getTime(), dtFinal.getTime(),
                                            mapAnds4Req , 
-                                           "uniStCodigo", listOrs4Req, 
+                                           "legStCodigo", listOrs4Req, 
                                            mapAnds4Det,
-                                           "uniStCodigo", listOrs4Det);
+                                           "legStCodigo", listOrs4Det);
                     
                                     if(doc != null && doc.isOpen()){
                                         doc.close();

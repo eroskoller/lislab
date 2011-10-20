@@ -18,10 +18,16 @@ public class TestRel {
     
     public static void main(String... agrs){
 //        LabUsuario user = OracleHelper.getLabUsuario("EROS", "DAFTPUNK");
-        LabRequisicao lr = (LabRequisicao)OracleHelper.getObject(LabRequisicao.class, new Long(1139365702));
+//        LabRequisicao lr = (LabRequisicao)OracleHelper.getObject(LabRequisicao.class, new Long(1139365702));
 //        List list = OracleHelper.getListOfObjectByKeyEq(LabDetalheRequisicao.class, "reqStCodigo", "1139365702", "reqStCodigo", true);
+//        List list = OracleHelper.getListOfObjectByKeyEq(LabRequisicao.class, "reqStCodigo", "1139365702", "reqStCodigo", true);
         
+        
+        System.out.println(new Double(25).intValue());
 //        System.out.println(user.getUsuStNome());
+        
+//        float f = 1.2f;
+//        System.out.println(Math.ceil(f));
     }
     
 }

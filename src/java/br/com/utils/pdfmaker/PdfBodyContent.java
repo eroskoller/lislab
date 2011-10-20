@@ -67,30 +67,33 @@ public class PdfBodyContent {
                 
                 static int[] arrayTitlePageWithsBotton = {20,25,55};
                 static int[] arrayContetTableWidths = {13,10,44,5,5,12,11};
-                static  Paragraph paragraph;
+//                static  Paragraph paragraph;
                 
                 
                 
                 
-                 private static PdfPTable contentTable;
-                 private static PdfPCell cell1;
+//                 private static PdfPTable contentTable;
+//                 private static PdfPCell cell1;
     
-        static  void addMetaData(Document document) {
+        static  Document addMetaData(Document document) {
 		document.addTitle("Relatório de Pendências");
 		document.addSubject("Pendencias");
 		document.addKeywords("Pendencias,Exames,Relatorio,Resultados");
 		document.addAuthor("Eros Koller");
 		document.addCreator("Eros Koller");
+                return document;
         }
                 
         
         
         
-        static void addTitlePage(Document document,Date dtInicio,Date dtFinal,String unidadeDesc,String pagina)
+        static PdfPTable addTitlePage(Date dtInicio,Date dtFinal,String unidadeDesc,String pagina)
 			throws DocumentException,Exception {
             
                                
-                        
+                                PdfPTable masterTable = new PdfPTable(1);
+                                masterTable.setWidthPercentage(100);
+                                
 		PdfPTable tableHeaderPage = new PdfPTable(3);
                                 tableHeaderPage.setWidthPercentage(100);
                                 
@@ -125,11 +128,13 @@ public class PdfBodyContent {
                                 cellRight.addElement(new Paragraph("                                  Laboratório", catFont12));
                                 tableHeaderPage.addCell(cellRight);
 
-
-                                document.add(tableHeaderPage);
+                                PdfPCell cell = new PdfPCell(tableHeaderPage);
+                                cell.setBorder(Rectangle.NO_BORDER);
+                                masterTable.addCell(cell);
                                 
                                 PdfPTable tableHeaderBotton = new PdfPTable(3);
                                 tableHeaderBotton.setWidthPercentage(100);
+                                
                                 PdfPCell cell1 = new PdfPCell();
                                 cell1.addElement(new Phrase("                                            "));
                                 cell1.setBorder(Rectangle.NO_BORDER);
@@ -152,15 +157,18 @@ public class PdfBodyContent {
                                 
                                 
                                 tableHeaderBotton.setWidths(arrayTitlePageWithsBotton);
-                                document.add(tableHeaderBotton);
+                                PdfPCell cellFim = new PdfPCell(tableHeaderBotton);
+                                cellFim.setBorder(Rectangle.NO_BORDER);
                                 
+                                masterTable.addCell(tableHeaderBotton);
                                 
+                                return  masterTable;
                                 
                                 
 	}
                 
     
-        static  void makeTablesHeader(Document doc) throws DocumentException{
+        static  PdfPTable makeTablesHeader() throws DocumentException{
             
             PdfPTable pdfTableContent = new PdfPTable(7);
             pdfTableContent.setWidths(arrayContetTableWidths);
@@ -181,25 +189,23 @@ public class PdfBodyContent {
             pdfTableContent.addCell(parUnidade);
             pdfTableContent.addCell(parDataEntrega);
             
-                    try {
-                        doc.add(pdfTableContent);
-                    } catch (DocumentException ex) {
-                        Logger.getLogger(PdfRelMakerPendencias.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                    
+            return  pdfTableContent;
+                    
                         
         }
         
     
 
-      static  float makePdfContentOneByOne(LabRequisicao  labReq,Document document) throws DocumentException{
+      static  PdfPTable makePdfContentOneByOne(LabRequisicao  labReq) throws DocumentException{
           
                                    
           
                                     LabPaciente pac = labReq.getPacInCodigo();
-                                    contentTable = new PdfPTable(7);
+                                    PdfPTable contentTable = new PdfPTable(7);
                                     contentTable.setWidthPercentage(100);
                                     contentTable.setWidths(arrayContetTableWidths);
-                                    cell1 = new PdfPCell();
+                                    PdfPCell cell1 = new PdfPCell();
                                     cell1.setBorder(Rectangle.NO_BORDER);
                                     cell1.addElement(new Phrase(formater2.format(labReq.getReqDtCadastro()) ,smallNormal8));
                                     cell1.setPadding(0);
@@ -241,7 +247,7 @@ public class PdfBodyContent {
 
                                     cell1 = new PdfPCell();
                                     cell1.setBorder(Rectangle.NO_BORDER);
-                                    cell1.addElement(new Phrase(labReq.getUniStCodigo().getUniStDescricaoResumida(),smallNormal8));
+                                    cell1.addElement(new Phrase(labReq.getUniStCodigo(),smallNormal8));
                                     cell1.setPadding(0);
                                     cell1.setPaddingLeft(5f);
                                     contentTable.addCell(cell1);
@@ -253,12 +259,23 @@ public class PdfBodyContent {
                                     cell1.setPaddingLeft(5f);
                                     contentTable.addCell(cell1);
 
-                                    document.add(contentTable);    
+//                                    document.add(contentTable);    
 
 
-                                    contentTable = new PdfPTable(1);
+                                    
+//                                    document.add(contentTable);
+          
+          
+          return contentTable;
+      }
+      
+      
+      
+      static public PdfPTable makePdfPTable4ListaExames(LabRequisicao labReq){
+          
+                                    PdfPTable contentTable = new PdfPTable(1);
                                     contentTable.setWidthPercentage(100);
-                                    cell1 = new PdfPCell();
+                                    PdfPCell cell1 = new PdfPCell();
                                     cell1.setBorder(Rectangle.NO_BORDER);
                                     cell1.addElement(new Phrase(labReq.getListTextExames(),smallBold7));
                                     cell1.setPadding(0);
@@ -268,14 +285,12 @@ public class PdfBodyContent {
                                     cell1 = new PdfPCell();
                                     cell1.setBorder(Rectangle.BOTTOM );
                                     contentTable.addCell(cell1);
-                                    document.add(contentTable);
-          
-          
-          return document.getPageSize().getHeight();
+                                    return contentTable;
       }
       
       
       static  void addEmptyLine(Document doc, int number) throws DocumentException {
+                                Paragraph paragraph = new Paragraph();
 		for (int i = 0; i < number; i++) {
 			paragraph.add(new Paragraph(" "));
 		}

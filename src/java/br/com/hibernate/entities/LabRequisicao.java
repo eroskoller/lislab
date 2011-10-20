@@ -46,23 +46,26 @@ public class LabRequisicao implements Serializable{
     private String reqStCodigo;
 
 
-    @ManyToOne
-    @JoinColumns({
-        @JoinColumn(name="ORI_ST_CODIGO"),
-        @JoinColumn(name="UNI_ST_CODIGO")
-    })
-    private LabOrigem oriStCodigo;
+//    @ManyToOne
+//    @JoinColumns({
+//        @JoinColumn(name="ORI_ST_CODIGO"),
+//        @JoinColumn(name="UNI_ST_CODIGO")
+//    })
+    @Column(name="ORI_ST_CODIGO")
+    private String oriStCodigo;
 //    @Column(name="ORI_ST_CODIGO")
 //    private String oriStCodigo;
 
     
-    @ManyToOne
-    @JoinColumn(name="UNI_ST_CODIGO",nullable=false, updatable=false, insertable=false)//mappeded
-    private LabUnidade uniStCodigo;
+//    @ManyToOne
+//    @JoinColumn(name="UNI_ST_CODIGO",nullable=false, updatable=false, insertable=false)//mappeded
+    @Column(name="UNI_ST_CODIGO",nullable=false, updatable=false, insertable=false)//mappeded
+    private String uniStCodigo;
 
-    @ManyToOne
-    @JoinColumn(name="CON_ST_CODIGO")//mappeded
-    private LabConvenio conStCodigo;
+//    @ManyToOne
+//    @JoinColumn(name="CON_ST_CODIGO")//mappeded
+    @Column(name="CON_ST_CODIGO")//mappeded
+    private String conStCodigo;
 
 
    //    @ManyToOne
@@ -105,9 +108,10 @@ public class LabRequisicao implements Serializable{
 //    })
     @Column(name="SOL_ST_CODIGO")
     private String solStCodigo;
-    @ManyToOne
-    @JoinColumn(name="LEG_ST_CODIGO")//mappeded
-    private LabLegenda legStCodigo;
+//    @ManyToOne
+//    @JoinColumn(name="LEG_ST_CODIGO")//mappeded
+    @Column(name="LEG_ST_CODIGO")//mappeded
+    private String legStCodigo;
 //    @ManyToOne
 //    @JoinColumns({
 //        @JoinColumn(name="ALO_IN_CODIGO",nullable=false, updatable=false, insertable=false),
@@ -140,9 +144,10 @@ public class LabRequisicao implements Serializable{
     private Character reqChPrecadastro;
     @Column(name="REQ_ST_DUM")
     private String reqStDUM;
-    @ManyToOne
-    @JoinColumn(name="PRO_ST_CODIGO")//mappeded
-    private LabProfissao proStCodigo;
+//    @ManyToOne
+//    @JoinColumn(name="PRO_ST_CODIGO")//mappeded
+    @Column(name="PRO_ST_CODIGO")//mappeded
+    private String proStCodigo;
     
 //    @ManyToOne
 //    @JoinColumns({
@@ -288,24 +293,21 @@ public class LabRequisicao implements Serializable{
         this.cidStCodigo = cidStCodigo;
     }
 
-    public LabOrigem getOriStCodigo() {
+    public String getOriStCodigo() {
         return oriStCodigo;
     }
 
-    public void setOriStCodigo(LabOrigem oriStCodigo) {
+    public void setOriStCodigo(String oriStCodigo) {
         this.oriStCodigo = oriStCodigo;
     }
 
-   
-  
-    public LabConvenio getConStCodigo() {
+    public String getConStCodigo() {
         return conStCodigo;
     }
 
-    public void setConStCodigo(LabConvenio conStCodigo) {
+    public void setConStCodigo(String conStCodigo) {
         this.conStCodigo = conStCodigo;
     }
-
     public String getLocStCodigo() {
         return locStCodigo;
     }
@@ -314,15 +316,13 @@ public class LabRequisicao implements Serializable{
         this.locStCodigo = locStCodigo;
     }
 
-    public LabProfissao getProStCodigo() {
+    public String getProStCodigo() {
         return proStCodigo;
     }
 
-    public void setProStCodigo(LabProfissao proStCodigo) {
+    public void setProStCodigo(String proStCodigo) {
         this.proStCodigo = proStCodigo;
     }
-
-
 
 
     public List<LabDetalheRequisicao> getListLabDetalheRequisicao() {
@@ -354,7 +354,7 @@ public class LabRequisicao implements Serializable{
             
             for(int i = 0 ; i < listLabDetalheRequisicaoFiltrado.size(); i ++){
                 LabDetalheRequisicao ldr = listLabDetalheRequisicaoFiltrado.get(i);
-                sb.append(ldr.getExaStCodigo().getExaStCodigo())
+                sb.append(ldr.getExaStCodigo())
                         .append(ArrayItens.getMapLegResumido().get(ldr.getLegStCodigo()));
                 
                 if(i < listLabDetalheRequisicaoFiltrado.size()-1){sb.append(" , ");}
@@ -372,21 +372,23 @@ public class LabRequisicao implements Serializable{
         this.aloInCodigo = aloInCodigo;
     }
 
-    public LabLegenda getLegStCodigo() {
+    public String getLegStCodigo() {
         return legStCodigo;
     }
 
-    public void setLegStCodigo(LabLegenda legStCodigo) {
+    public void setLegStCodigo(String legStCodigo) {
         this.legStCodigo = legStCodigo;
     }
 
-    public LabUnidade getUniStCodigo() {
+    public String getUniStCodigo() {
         return uniStCodigo;
     }
 
-    public void setUniStCodigo(LabUnidade uniStCodigo) {
+    public void setUniStCodigo(String uniStCodigo) {
         this.uniStCodigo = uniStCodigo;
     }
+
+    
 
     public String getLegStCodigoFat() {
         return legStCodigoFat;
@@ -833,7 +835,7 @@ public class LabRequisicao implements Serializable{
     public LabRegras getBuscaLabRegra(){
         if(uniStCodigo != null && conStCodigo != null && regStCodigo != null ){
             if(buscaLabRegra == null){
-                buscaLabRegra =  OracleHelper.getLabRegrasByUniStCodigoAndConStCodigoAndRegStCodigo(uniStCodigo.getUniStCodigo(), conStCodigo.getConStCodigo()
+                buscaLabRegra =  OracleHelper.getLabRegrasByUniStCodigoAndConStCodigoAndRegStCodigo(uniStCodigo, this.conStCodigo
                     , this.getRegStCodigo());
                 return buscaLabRegra;
             }else{
@@ -847,7 +849,7 @@ public class LabRequisicao implements Serializable{
 public LabColetor getBuscaLabColetor(){
     if(colStCodigo != null && uniStCodigo != null){
         if(buscaLabColetor == null){
-              buscaLabColetor = OracleHelper.getLabColetorByColStCodigo_UniStCodigo(this.colStCodigo, uniStCodigo.getUniStCodigo());
+              buscaLabColetor = OracleHelper.getLabColetorByColStCodigo_UniStCodigo(this.colStCodigo, uniStCodigo);
               return buscaLabColetor;
         }else{
             return buscaLabColetor;

@@ -42,12 +42,14 @@ public class LabPaciente implements Serializable{
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "SEQ_PAC_IN_CODIGO")
     @SequenceGenerator(name="SEQ_PAC_IN_CODIGO", sequenceName = "SEQ_PAC_IN_CODIGO")
     private Long pacInCodigo;
-    @ManyToOne(fetch= FetchType.LAZY)
-    @JoinColumn(name="CON_ST_CODIGO")
-    private LabConvenio conStCodigo;
-    @ManyToOne(fetch= FetchType.LAZY)
-    @JoinColumn(name="UNI_ST_CODIGO")
-    private LabUnidade uniStCodigo;
+//    @ManyToOne(fetch= FetchType.LAZY)
+//    @JoinColumn(name="CON_ST_CODIGO")
+    @Column(name="CON_ST_CODIGO")
+    private String conStCodigo;
+//    @ManyToOne(fetch= FetchType.LAZY)
+//    @JoinColumn(name="UNI_ST_CODIGO")
+    @Column(name="UNI_ST_CODIGO")
+    private String uniStCodigo;
 
 
     @Column(name="PAC_ST_NOME")
@@ -146,15 +148,15 @@ public class LabPaciente implements Serializable{
         this.listLabRequisicao = listLabRequisicao;
     }
 
-
-    
-    public LabConvenio getConStCodigo() {
+    public String getConStCodigo() {
         return conStCodigo;
     }
 
-    public void setConStCodigo(LabConvenio conStCodigo) {
+    public void setConStCodigo(String conStCodigo) {
         this.conStCodigo = conStCodigo;
     }
+
+
 
   
     public String getPacBlObservacao() {
@@ -431,14 +433,15 @@ public class LabPaciente implements Serializable{
         this.listLabAgendaPaciente = listLabAgendaPaciente;
     }
 
-    public LabUnidade getUniStCodigo() {
+    public String getUniStCodigo() {
         return uniStCodigo;
     }
 
-    public void setUniStCodigo(LabUnidade uniStCodigo) {
+    public void setUniStCodigo(String uniStCodigo) {
         this.uniStCodigo = uniStCodigo;
     }
 
+    
    
         @Transient
         public String getPacStNomeResumido(){

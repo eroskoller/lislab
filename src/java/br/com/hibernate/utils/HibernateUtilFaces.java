@@ -29,6 +29,7 @@ public class HibernateUtilFaces {
                 // Create the SessionFactory from standard (hibernate.cfg.xml)
                 // config file.
                 sessionFactory = new AnnotationConfiguration().configure("hibernateOracle.cfg.xml").buildSessionFactory();
+                System.out.println("Session is loaded...........................");
                // SessionFactory s = new AnnotationConfiguration().configure("kgk.xml").buildSessionFactory();
 //                cal1 = Calendar.getInstance();
 //                cal1.add(Calendar.HOUR, 168);

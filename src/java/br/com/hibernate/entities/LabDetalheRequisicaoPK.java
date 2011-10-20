@@ -25,20 +25,23 @@ public class LabDetalheRequisicaoPK implements Serializable {
     @Column(name="REQ_ST_CODIGO")
     private String reqStCodigo;
     @Id
-     @ManyToOne
-     @JoinColumn(name="EXA_ST_CODIGO")
-    private LabExame exaStCodigo;
+//     @ManyToOne
+//     @JoinColumn(name="EXA_ST_CODIGO")
+    @Column(name="EXA_ST_CODIGO")
+    private String exaStCodigo;
     @Id
-     @Column(name="SEQ_ST_CODIGO")
+    @Column(name="SEQ_ST_CODIGO")
     private String seqStCodigo;
 
-    public LabExame getExaStCodigo() {
+    public String getExaStCodigo() {
         return exaStCodigo;
     }
 
-    public void setExaStCodigo(LabExame exaStCodigo) {
+    public void setExaStCodigo(String exaStCodigo) {
         this.exaStCodigo = exaStCodigo;
     }
+
+    
 
     public String getReqStCodigo() {
         return reqStCodigo;

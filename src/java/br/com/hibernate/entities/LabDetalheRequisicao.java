@@ -47,9 +47,10 @@ public class LabDetalheRequisicao  implements Serializable {
     @Column(name = "REQ_ST_CODIGO")
      private String reqStCodigo;
     @Id
-    @ManyToOne
+//    @ManyToOne
+//    @JoinColumn(name = "EXA_ST_CODIGO")
     @JoinColumn(name = "EXA_ST_CODIGO")
-     private LabExame exaStCodigo;
+    private String exaStCodigo;
     @Id
     @Column(name = "SEQ_ST_CODIGO")
      private String seqStCodigo;
@@ -57,6 +58,7 @@ public class LabDetalheRequisicao  implements Serializable {
 
     @Column(name = "UNI_ST_CODIGO")
     private String uniStCodigo;
+    
     @Column(name = "DER_ST_UNIDADEEX")
     private String derStUnidadeEx;
     @Column(name = "MOR_ST_CODIGO")
@@ -324,7 +326,7 @@ public class LabDetalheRequisicao  implements Serializable {
 
     
 
-    public LabDetalheRequisicao(String reqStCodigo, LabExame exaStCodigo, String seqStCodigo, String uniStCodigo, String derStUnidadeEx, String morStCodigo, String setStCodigo, String equStCodigo, String obsStCodigo, String pexStCodigo, String amoStCodigo, String legStCodigo, String legStCodigoFat, String tapStCodigo, String tabStCodigo, Character derChUrgente, Character derChLiberacaoAutomatica, Character derChAutomatico, Integer derInRepeticao, String derStDiluicao, Character derChNaoNecessario, Integer derInFlag, Integer derInEnvioLis, Character derChParcial, Character derChRepetir, String derStAutorizacao, Date derDtEntradaMat, Date derHREntradaMat, Character derChTrouxeMat, Float derFlValorCh, Float derFlQtDeCh, Date derDtDataFatura, Date derHrHoraFatura, Date derDtDataPrevistaEntrega, Date derHrHoraPrevistaEntrega, String lotStCodigo, String usuStCodigo, Character derChInterface, String metStCodigo,Timestamp  emvDtValidade, Date resDtValidade, Integer derInMapaSeq, String grpStCodigo, String apoStCodigo, String frlCodigo, Integer derInLaudoSeq, Float derFlConvenio, Float derFlDesconto, Float derFlAcrescimo, Character derChVlDiferenciado, String usuStCodigoAss, Character derChFatura, Character derChImpresso, Character derChIncluidoAposConf, String derStObsRepeticao, Character derChEtiqueta, Long derInCodigo, Integer derInValidadeRes, String recStCodigo, Long sorInCodigo, Integer derInVertical, Integer derInHorizontal, String pfeStCodigo, Integer derInViasImpressas, Character derChNovaColeta, String derStVolume, String derStOrdemItegracao, Character derChOmiteCad, Date reqDtCadastro, String matStCodigo, String derStGuia, String derStMaterial, Date derDtAssinatura, Date derDtFatura, Character derChEnvioOla, Date derDtImpressao, Character derChEspecial, Character derChEnviadoHis, String sisStCodigo, String derStUnidadeAss, String cntStCodigo, String reqStCodigoLis, Date derDtDataTransporte, Long reqInCodigo, String oriStCodigo, String conStCodigo, Long equInCodigo, Date derDtColeta, Date derHrColeta, Character derChRestricao, String depStCodigo, String subStSequencia, Character derChFaturaExterno, Integer derInTempo, Character derChColetado, Date derDtLastUpdate, String derStSeqIntegracao, Character derChEnviadoRegLab, Character derChTipo, String derStProcedimentoAlt, String regStCodigo) {
+    public LabDetalheRequisicao(String reqStCodigo, String exaStCodigo, String seqStCodigo, String uniStCodigo, String derStUnidadeEx, String morStCodigo, String setStCodigo, String equStCodigo, String obsStCodigo, String pexStCodigo, String amoStCodigo, String legStCodigo, String legStCodigoFat, String tapStCodigo, String tabStCodigo, Character derChUrgente, Character derChLiberacaoAutomatica, Character derChAutomatico, Integer derInRepeticao, String derStDiluicao, Character derChNaoNecessario, Integer derInFlag, Integer derInEnvioLis, Character derChParcial, Character derChRepetir, String derStAutorizacao, Date derDtEntradaMat, Date derHREntradaMat, Character derChTrouxeMat, Float derFlValorCh, Float derFlQtDeCh, Date derDtDataFatura, Date derHrHoraFatura, Date derDtDataPrevistaEntrega, Date derHrHoraPrevistaEntrega, String lotStCodigo, String usuStCodigo, Character derChInterface, String metStCodigo,Timestamp  emvDtValidade, Date resDtValidade, Integer derInMapaSeq, String grpStCodigo, String apoStCodigo, String frlCodigo, Integer derInLaudoSeq, Float derFlConvenio, Float derFlDesconto, Float derFlAcrescimo, Character derChVlDiferenciado, String usuStCodigoAss, Character derChFatura, Character derChImpresso, Character derChIncluidoAposConf, String derStObsRepeticao, Character derChEtiqueta, Long derInCodigo, Integer derInValidadeRes, String recStCodigo, Long sorInCodigo, Integer derInVertical, Integer derInHorizontal, String pfeStCodigo, Integer derInViasImpressas, Character derChNovaColeta, String derStVolume, String derStOrdemItegracao, Character derChOmiteCad, Date reqDtCadastro, String matStCodigo, String derStGuia, String derStMaterial, Date derDtAssinatura, Date derDtFatura, Character derChEnvioOla, Date derDtImpressao, Character derChEspecial, Character derChEnviadoHis, String sisStCodigo, String derStUnidadeAss, String cntStCodigo, String reqStCodigoLis, Date derDtDataTransporte, Long reqInCodigo, String oriStCodigo, String conStCodigo, Long equInCodigo, Date derDtColeta, Date derHrColeta, Character derChRestricao, String depStCodigo, String subStSequencia, Character derChFaturaExterno, Integer derInTempo, Character derChColetado, Date derDtLastUpdate, String derStSeqIntegracao, Character derChEnviadoRegLab, Character derChTipo, String derStProcedimentoAlt, String regStCodigo) {
         this.reqStCodigo = reqStCodigo;
         this.exaStCodigo = exaStCodigo;
         this.seqStCodigo = seqStCodigo;
@@ -428,14 +430,11 @@ public class LabDetalheRequisicao  implements Serializable {
         this.regStCodigo = regStCodigo;
     }
 
-  
-
-
-       public LabExame getExaStCodigo() {
+    public String getExaStCodigo() {
         return exaStCodigo;
     }
 
-    public void setExaStCodigo(LabExame exaStCodigo) {
+    public void setExaStCodigo(String exaStCodigo) {
         this.exaStCodigo = exaStCodigo;
     }
 
@@ -1428,165 +1427,165 @@ public class LabDetalheRequisicao  implements Serializable {
 
 
 
-    @Transient
-    public static LabDetalheRequisicao  makeCustomLabDetRequisicao(
-             Character derChUrgente,
-             ExameFormatado ef,LabSolicitante ls,
-             LabUsuario lus,LabUnidade lu,
-             LabConvenio lc,LabRegras lrg,
-             LabRequisicao lrq,LabExame le,
-             LabLocal ll,
-             Character trouxeMat,String myGrpStCodigo,
-             LabOrigem lo,
-             String matStCodigo){
-
-         Calendar cal =   Calendar.getInstance();
-         Date today = cal.getTime();
-         Timestamp ttoday = new Timestamp(today.getTime());
-
-          String myUnidadeEx = "nada";
-         Character myderChLiberacaoAutomatica =  'S';
-         String myLegStCodigo = "";
-         String myLegStCodigoFat = "";
-
-        LabExameUnidadePK leupk = new LabExameUnidadePK();
-        leupk.setExaStCodigo(le.getExaStCodigo());
-        leupk.setUniStCodigo(lu.getUniStCodigo());
-
-        LabExameUnidade leu =  (LabExameUnidade) OracleHelper.getObject(LabExameUnidade.class, leupk);
-
-                if(derChUrgente.toString().equalsIgnoreCase("S")){
-
-                }else{
-
-                }
-
-
-         if(derChUrgente.toString().equalsIgnoreCase("S")){
-             myUnidadeEx = leu.getExuStUnidadeExUrgente();
-         }else{
-             myUnidadeEx = leu.getExuStUnidadeEx();
-         }
-         if(leu.getExuChLiberaIngressoManual().toString().equalsIgnoreCase("S")){
-           myderChLiberacaoAutomatica = 'N';
-         }
-        if(leu.getExuChConfereAutomaticoFat().toString().equalsIgnoreCase("S")){
-            myLegStCodigo = "002";
-            myLegStCodigoFat = "FAT";
-        }else{
-            myLegStCodigo = "001";
-            myLegStCodigoFat = "";
-        }
-
-
-
-
-
-
-
-         return new LabDetalheRequisicao(lrq.getReqStCodigo() ,
-                 le,
-                 "01",
-                 lu.getUniStCodigo(),
-                  myUnidadeEx,  // derStCodigoEx
-                 null,//String morStCodigo
-                 ef.getSetStCodigo(),
-                 null ,//String equStCodigo
-                 null, // String obsStCodigo
-                 null ,//String pexStCodigo
-                 null , //String amoStCodigo
-                 myLegStCodigo,//String legStCodigo
-                 myLegStCodigoFat ,//String legStCodigoFat
-                 ef.getTapStCodigo() ,
-                 ef.getTabStCodigo() ,
-                 derChUrgente ,//Character derChUrgente
-                  myderChLiberacaoAutomatica,//Character derChLiberacaoAutomatica
-                 myderChLiberacaoAutomatica ,//Character derChAutomatico
-                 null ,// Integer derInRepeticao
-                 null,//String derStDiluicao
-                 'N' ,//Character derChNaoNecessario
-                 0 ,//Integer derInFlag
-                 null ,//Integer derInEnvioLis
-                 'N' ,//Character derChParcial
-                 'N' ,//Character derChRepetir
-                 null ,//String derStAutorizacao
-                 null,//Date derDtEntradaMat
-                 null,//Date derHREntradaMat
-                 trouxeMat,//Character derChTrouxeMat
-                 ef.getRtpFlValorCh(),//Float derFlValorCh
-                ef.getTabFlQtDeCh() ,// Float derFlQtDeCh
-                 null,//Date derDtDataFatura
-                 null,//Date derHrHoraFatura
-                 null,//Date derDtDataPrevistaEntrega
-                 null,//Date derHrHoraPrevistaEntrega
-                 null, //String lotStCodigo
-                 lus.getUniStCodigo(),//String usuStCodigo
-                 'N',//Character derChInterface
-                 ef.getMetStCodigo(),//String metStCodigo
-                 ttoday,//Date emvDtValidade  ??????????????????????????????????????????????
-                 null, //Date resDtValidade
-                 null,//Integer derInMapaSeq
-                 myGrpStCodigo, //String grpStCodigo
-                 null,//String apoStCodigo
-                 null,//String frlCodigo ???????????????????????????????????????????
-                 null,//Integer derInLaudoSeq  ???????????????????????????????????????????????????
-                 null,//Float derFlConvenio  valor liquido
-                 null,//Float derFlDesconto  rtpFlDesconto
-                 null,//Float derFlAcrescimo null
-                 null,//Character derChVlDiferenciado sim ou nao deacordo c a conta
-                 null,//String usuStCodigoAss
-                 null,//Character derChFatura  exuChFatura or exaChaFatura grupo
-                 'N',//Character derChImpresso  ????????????????????????????
-                 'N',//Character derChIncluidoAposConf ?????????????????????????
-                 null,//String derStObsRepeticao
-                 null,//Character derChEtiqueta ????????????????????????
-                 OracleConnector.getDerInCodigo(),//Long derInCodigo
-                 null,//Integer derInValidadeRes  ???????????????
-                 null,//String recStCodigo  ????????????????
-                 null,//Long sorInCodigo  ????????????
-                 null,//Integer derInVertical   ?????????
-                 null,//Integer derInHorizontal ??????????
-                 null,//String pfeStCodigo  ?????
-                 null,//Integer derInViasImpressas ????????
-                 null,//Character derChNovaColeta  ???????
-                 null,//String derStVolume  ?????
-                 null,//String derStOrdemItegracao
-                 'N',//Character derChOmiteCad  ??????????????????????
-                 lrq.getReqDtCadastro(),//Date reqDtCadastro
-                 matStCodigo,//String matStCodigo
-                 null,//String derStGuia
-                 null,//String derStMaterial
-                 null,//Date derDtAssinatura
-                 null,//Date derDtFatura
-                 null,//Character derChEnvioOla
-                 null,//Date derDtImpressao
-                 null,//Character derChEspecial
-                 null,//Character derChEnviadoHis
-                 null,//String sisStCodigo
-                 lu.getUniStCodigo(),//String derStUnidadeAss  ???????
-                 null,//String cntStCodigo
-                 null,//String reqStCodigoLis
-                 null,//Date derDtDataTransporte
-                 null,//Long reqInCodigo
-                 lo.getLocStCodigo(),//String oriStCodigo
-                 lc.getConStCodigo(),//String conStCodigo
-                 null,//Long equInCodigo
-                 null,//Date derDtColeta
-                 null,//Date derHrColeta
-                 null,//Character derChRestricao
-                 null,//String depStCodigo
-                 null,//String subStSequencia
-                 null,//Character derChFaturaExterno
-                 null,//Integer derInTempo
-                 null,//Character derChColetado
-                 null,//Date derDtLastUpdate
-                 null,//String derStSeqIntegracao
-                 null,//Character derChEnviadoRegLab
-                  '1',//Character derChTipo
-                 null,//String derStProcedimentoAlt
-                 lrg.getRegStCodigo()//String regStCodigo
-                 );
-     }
+//    @Transient
+//    public static LabDetalheRequisicao  makeCustomLabDetRequisicao(
+//             Character derChUrgente,
+//             ExameFormatado ef,LabSolicitante ls,
+//             LabUsuario lus,LabUnidade lu,
+//             LabConvenio lc,LabRegras lrg,
+//             LabRequisicao lrq,LabExame le,
+//             LabLocal ll,
+//             Character trouxeMat,String myGrpStCodigo,
+//             LabOrigem lo,
+//             String matStCodigo){
+//
+//         Calendar cal =   Calendar.getInstance();
+//         Date today = cal.getTime();
+//         Timestamp ttoday = new Timestamp(today.getTime());
+//
+//          String myUnidadeEx = "nada";
+//         Character myderChLiberacaoAutomatica =  'S';
+//         String myLegStCodigo = "";
+//         String myLegStCodigoFat = "";
+//
+//        LabExameUnidadePK leupk = new LabExameUnidadePK();
+//        leupk.setExaStCodigo(le.getExaStCodigo());
+//        leupk.setUniStCodigo(lu.getUniStCodigo());
+//
+//        LabExameUnidade leu =  (LabExameUnidade) OracleHelper.getObject(LabExameUnidade.class, leupk);
+//
+//                if(derChUrgente.toString().equalsIgnoreCase("S")){
+//
+//                }else{
+//
+//                }
+//
+//
+//         if(derChUrgente.toString().equalsIgnoreCase("S")){
+//             myUnidadeEx = leu.getExuStUnidadeExUrgente();
+//         }else{
+//             myUnidadeEx = leu.getExuStUnidadeEx();
+//         }
+//         if(leu.getExuChLiberaIngressoManual().toString().equalsIgnoreCase("S")){
+//           myderChLiberacaoAutomatica = 'N';
+//         }
+//        if(leu.getExuChConfereAutomaticoFat().toString().equalsIgnoreCase("S")){
+//            myLegStCodigo = "002";
+//            myLegStCodigoFat = "FAT";
+//        }else{
+//            myLegStCodigo = "001";
+//            myLegStCodigoFat = "";
+//        }
+//
+//
+//
+//
+//
+//
+//
+//         return new LabDetalheRequisicao(lrq.getReqStCodigo() ,
+//                 le,
+//                 "01",
+//                 lu.getUniStCodigo(),
+//                  myUnidadeEx,  // derStCodigoEx
+//                 null,//String morStCodigo
+//                 ef.getSetStCodigo(),
+//                 null ,//String equStCodigo
+//                 null, // String obsStCodigo
+//                 null ,//String pexStCodigo
+//                 null , //String amoStCodigo
+//                 myLegStCodigo,//String legStCodigo
+//                 myLegStCodigoFat ,//String legStCodigoFat
+//                 ef.getTapStCodigo() ,
+//                 ef.getTabStCodigo() ,
+//                 derChUrgente ,//Character derChUrgente
+//                  myderChLiberacaoAutomatica,//Character derChLiberacaoAutomatica
+//                 myderChLiberacaoAutomatica ,//Character derChAutomatico
+//                 null ,// Integer derInRepeticao
+//                 null,//String derStDiluicao
+//                 'N' ,//Character derChNaoNecessario
+//                 0 ,//Integer derInFlag
+//                 null ,//Integer derInEnvioLis
+//                 'N' ,//Character derChParcial
+//                 'N' ,//Character derChRepetir
+//                 null ,//String derStAutorizacao
+//                 null,//Date derDtEntradaMat
+//                 null,//Date derHREntradaMat
+//                 trouxeMat,//Character derChTrouxeMat
+//                 ef.getRtpFlValorCh(),//Float derFlValorCh
+//                ef.getTabFlQtDeCh() ,// Float derFlQtDeCh
+//                 null,//Date derDtDataFatura
+//                 null,//Date derHrHoraFatura
+//                 null,//Date derDtDataPrevistaEntrega
+//                 null,//Date derHrHoraPrevistaEntrega
+//                 null, //String lotStCodigo
+//                 lus.getUniStCodigo(),//String usuStCodigo
+//                 'N',//Character derChInterface
+//                 ef.getMetStCodigo(),//String metStCodigo
+//                 ttoday,//Date emvDtValidade  ??????????????????????????????????????????????
+//                 null, //Date resDtValidade
+//                 null,//Integer derInMapaSeq
+//                 myGrpStCodigo, //String grpStCodigo
+//                 null,//String apoStCodigo
+//                 null,//String frlCodigo ???????????????????????????????????????????
+//                 null,//Integer derInLaudoSeq  ???????????????????????????????????????????????????
+//                 null,//Float derFlConvenio  valor liquido
+//                 null,//Float derFlDesconto  rtpFlDesconto
+//                 null,//Float derFlAcrescimo null
+//                 null,//Character derChVlDiferenciado sim ou nao deacordo c a conta
+//                 null,//String usuStCodigoAss
+//                 null,//Character derChFatura  exuChFatura or exaChaFatura grupo
+//                 'N',//Character derChImpresso  ????????????????????????????
+//                 'N',//Character derChIncluidoAposConf ?????????????????????????
+//                 null,//String derStObsRepeticao
+//                 null,//Character derChEtiqueta ????????????????????????
+//                 OracleConnector.getDerInCodigo(),//Long derInCodigo
+//                 null,//Integer derInValidadeRes  ???????????????
+//                 null,//String recStCodigo  ????????????????
+//                 null,//Long sorInCodigo  ????????????
+//                 null,//Integer derInVertical   ?????????
+//                 null,//Integer derInHorizontal ??????????
+//                 null,//String pfeStCodigo  ?????
+//                 null,//Integer derInViasImpressas ????????
+//                 null,//Character derChNovaColeta  ???????
+//                 null,//String derStVolume  ?????
+//                 null,//String derStOrdemItegracao
+//                 'N',//Character derChOmiteCad  ??????????????????????
+//                 lrq.getReqDtCadastro(),//Date reqDtCadastro
+//                 matStCodigo,//String matStCodigo
+//                 null,//String derStGuia
+//                 null,//String derStMaterial
+//                 null,//Date derDtAssinatura
+//                 null,//Date derDtFatura
+//                 null,//Character derChEnvioOla
+//                 null,//Date derDtImpressao
+//                 null,//Character derChEspecial
+//                 null,//Character derChEnviadoHis
+//                 null,//String sisStCodigo
+//                 lu.getUniStCodigo(),//String derStUnidadeAss  ???????
+//                 null,//String cntStCodigo
+//                 null,//String reqStCodigoLis
+//                 null,//Date derDtDataTransporte
+//                 null,//Long reqInCodigo
+//                 lo.getLocStCodigo(),//String oriStCodigo
+//                 lc.getConStCodigo(),//String conStCodigo
+//                 null,//Long equInCodigo
+//                 null,//Date derDtColeta
+//                 null,//Date derHrColeta
+//                 null,//Character derChRestricao
+//                 null,//String depStCodigo
+//                 null,//String subStSequencia
+//                 null,//Character derChFaturaExterno
+//                 null,//Integer derInTempo
+//                 null,//Character derChColetado
+//                 null,//Date derDtLastUpdate
+//                 null,//String derStSeqIntegracao
+//                 null,//Character derChEnviadoRegLab
+//                  '1',//Character derChTipo
+//                 null,//String derStProcedimentoAlt
+//                 lrg.getRegStCodigo()//String regStCodigo
+//                 );
+//     }
 
     @Override
     public boolean equals(Object obj) {

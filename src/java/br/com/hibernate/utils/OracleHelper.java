@@ -1816,7 +1816,7 @@ public static LabSolicitante getLabSolicitanteByLabSolicitantePK(Class clazz,Lab
                                     if(listLabDetalheRequisicao != null && listLabDetalheRequisicao.size()>0){
                                         listLabExame = new ArrayList<LabExame>();
                                         for(LabDetalheRequisicao ldr : listLabDetalheRequisicao){
-                                            listLabExame.add(ldr.getExaStCodigo());
+                                            listLabExame.add(new LabExame(ldr.getExaStCodigo()));
                                         }
                                     }
                           }
@@ -1886,8 +1886,10 @@ public static LabSolicitante getLabSolicitanteByLabSolicitantePK(Class clazz,Lab
 
                      if(listLabDetalheRequisicao.size()>0){
                          for(LabDetalheRequisicao l : listLabDetalheRequisicao){
-                             ExameBean ex = new ExameBean(); ex.setStrExameDescricao(l.getExaStCodigo().getExaStDescricao());
-                             ex.setStrExameExame(l.getExaStCodigo().getExaStCodigo());
+                             ExameBean ex = new ExameBean(); 
+                             LabExame e = (LabExame) OracleHelper.getObject(LabExame.class,l.getExaStCodigo());
+                             ex.setStrExameDescricao(e.getExaStDescricao());
+                             ex.setStrExameExame(l.getExaStCodigo());
                              ex.setStrExameStatus(l.getLegStCodigo());
                              listExameBean.add(ex);
 
@@ -1993,8 +1995,11 @@ public static List<ExameBean> getListExamePlustListMaterial(String reqStCodigo){
                                      for(LabDetalheRequisicao l : listLabDetalheRequisicao){
                                          if(l.getMatStCodigo() != null){
                                                      ExameBean ex = new ExameBean();
-                                                     ex.setStrExameDescricao(l.getExaStCodigo().getExaStDescricao());
-                                                     ex.setStrExameExame(l.getExaStCodigo().getExaStCodigo());
+                                                     
+                                                     LabExame e = (LabExame) OracleHelper.getObject(LabExame.class,l.getExaStCodigo());
+                                                     
+                                                     ex.setStrExameDescricao(e.getExaStDescricao());
+                                                     ex.setStrExameExame(e.getExaStCodigo());
                                                      ex.setStrExameStatus(l.getLegStCodigo());
                                                      ex.setStrLegStSigla(l.getLegStSigla());
 
@@ -2314,7 +2319,7 @@ public static List<LabUnidade> getListLabUnidadeOrderByUniStCodigo(){
                              lpb.setPacInCodigo(lp.getPacInCodigo());
                              lpb.setPacStNome(lp.getPacStNome());
                              lpb.setPacDtNascimento(lp.getPacDtNascimento());
-                             lpb.setUniStCodigo(lp.getUniStCodigo().getUniStCodigo());
+                             lpb.setUniStCodigo(lp.getUniStCodigo());
                              listPacBean.add(lpb);
                          }
                      }
@@ -3580,15 +3585,7 @@ public static List<LabConfigIngresso> getListLabConfiruraConfigIngressos(String 
             session = getSessionDude();//sessionFactory.getCurrentSession();
             tx = session.beginTransaction();
             Criteria criteria = session.createCriteria(myClass);
-
-            if(mapArgsAnds != null && mapArgsAnds.size()>0){
-                
-                Iterator iter = mapArgsAnds.entrySet().iterator();
-                while(iter.hasNext()){
-                    Map.Entry<String,Object> pair =  (Map.Entry<String,Object>) iter.next();
-                    criteria.add(Restrictions.eq(pair.getKey(),pair.getValue()));
-                }
-            }
+            
             
             if(dtStart != null &&dtEnd != null){
                 
@@ -3606,6 +3603,17 @@ public static List<LabConfigIngresso> getListLabConfiruraConfigIngressos(String 
                 }
                 
             }
+
+            if(mapArgsAnds != null && mapArgsAnds.size()>0){
+                
+                Iterator iter = mapArgsAnds.entrySet().iterator();
+                while(iter.hasNext()){
+                    Map.Entry<String,Object> pair =  (Map.Entry<String,Object>) iter.next();
+                    criteria.add(Restrictions.eq(pair.getKey(),pair.getValue()));
+                }
+            }
+            
+            
             
             if(listArgsOrs != null && listArgsOrs.size()>0){
                 Disjunction disj;
