@@ -20,12 +20,16 @@ import br.com.hibernate.entities.LabUnidade;
 import br.com.hibernate.utils.OracleHelper;
 
 
+import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.Rectangle;
+import com.itextpdf.text.pdf.ColumnText;
+import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -52,7 +56,7 @@ public class PdfRelMakerPendencias {
         
         
         
-        private  static Document makePdfPendencia(String pdfName,Date dtIncio , Date dtFinal,List<LabRequisicao> listRequisicao) 
+        private  static Document makePdfPendencia(String pdfName,String unidadeDesc,Date dtIncio , Date dtFinal,List<LabRequisicao> listRequisicao) 
                 throws FileNotFoundException, DocumentException, Exception{
             
 //            int intNo_BORDER = Rectangle.NO_BORDER;
@@ -79,7 +83,8 @@ public class PdfRelMakerPendencias {
                            String sPages = dPagesCeil.toString().substring(0, dPagesCeil.toString().length()-2);
                            Integer iPages = 1;
                            
-                           document.add(PdfBodyContent.addTitlePage(dtIncio,dtFinal,"Unidade",iPages.toString()+"/"+sPages ));
+                           
+                           document.add(PdfBodyContent.addTitlePage(dtIncio,dtFinal,unidadeDesc,iPages.toString()+"/"+sPages ));
                            document.add(PdfBodyContent.makeTablesHeader());
                             
                         
@@ -115,9 +120,17 @@ public class PdfRelMakerPendencias {
                         
                     }
                     
-                  
-                    
-                    
+//                Phrase footer = new Phrase(new Chunk("Fim da pagina", PdfBodyContent.catFont8));
+//                Rectangle rect = new Rectangle(200, 500);
+//                rect.setBackgroundColor(BaseColor.RED);
+//                footer.setLeading(12);
+////                footer.add(new Chunk("There is no obligation to comply with these prices. Date Printed: "));
+////                 ColumnText c = new ColumnText(new PdfContentByte(writer)) ; // 
+//                 ColumnText.showTextAligned(writer.getDirectContent(), Element.ALIGN_BOTTOM, footer, 700,300, 0);
+////                    c.showTextAligned(writer.getDirectContent(), Element.ALIGN_CENTER, new Phrase("Fim da pagina"), 700,300, 0);
+//                    document.add(footer);
+                            
+                            
                     document.close();
                     return document;
                     
@@ -140,7 +153,10 @@ public class PdfRelMakerPendencias {
                 comeco = new Date().getTime();
                 for(LabRequisicao lr : listReq){
                     mapAnds4Det.put("reqStCodigo", lr.getReqStCodigo());
-                    List<LabDetalheRequisicao> listDr = OracleHelper.getListObjectsByAnds_Ors(LabDetalheRequisicao.class, mapAnds4Det, field4OrsDet, listOrs4Det); 
+                    mapAnds4Det.put("uniStCodigo", lr.getUniStCodigo());
+                    mapAnds4Det.put("reqInCodigo", lr.getReqInCodigo());
+                    mapAnds4Det.put("conStCodigo", lr.getConStCodigo());
+                    List<LabDetalheRequisicao> listDr = OracleHelper.getListObjectsByAnds_Ors_Dates(LabDetalheRequisicao.class, mapAnds4Det, field4OrsDet, listOrs4Det,"reqDtCadastro", dtInicio, dtFinal); 
                     if(listDr != null && ! listDr.isEmpty()){
                         lr.setListLabDetalheRequisicaoFiltrado(listDr);
                     }
@@ -172,11 +188,20 @@ public class PdfRelMakerPendencias {
                            && mapAnds4Det != null && ! mapAnds4Det.isEmpty() && field4OrsDet  != null && listOrs4Det != null){
 
                         try {
-                            
+                            LabUnidade labUnidade;
+                            String unidadeDesc = "NI";
                             List<LabRequisicao> listReq = grabListLabRequisicaosWithReqFilterAndLabDetFilter(dtInicio, dtFinal, mapAnds4Req, field4OrsReq, listOrs4Req, mapAnds4Det, field4OrsDet, listOrs4Det);
                             
+                            if(mapAnds4Req.get("uniStCodigo") != null){
+                                labUnidade = (LabUnidade)OracleHelper.getObject(LabUnidade.class, mapAnds4Req.get("uniStCodigo"));
+                                if(labUnidade != null){
+                                    unidadeDesc = labUnidade.getUniStCodigo()+" "+labUnidade.getUniStDescricao();
+                                }
+                            }
+                            
+                            
                             if(listReq != null && !listReq.isEmpty()){
-                               return  makePdfPendencia(pdfName, dtInicio, dtFinal, listReq);
+                               return  makePdfPendencia(pdfName, unidadeDesc,dtInicio, dtFinal, listReq);
                             }else{
                                 return  null;
                             }
@@ -209,10 +234,10 @@ public class PdfRelMakerPendencias {
 //                                System.out.println(PageSize.A4.getHeight()); 
                     
                                     Calendar dtInicio = Calendar.getInstance();
-                                    dtInicio.add(Calendar.DAY_OF_YEAR, -5);
-//                                    dtInicio.add(Calendar.HOUR_OF_DAY, -4);
+//                                    dtInicio.add(Calendar.DAY_OF_YEAR, -30);
+                                    dtInicio.add(Calendar.HOUR_OF_DAY, -1);
                                     Calendar dtFinal = Calendar.getInstance();
-                                    String uniStCodigo = "SPS";
+                                    String uniStCodigo = "HAS";
                                     String oriStCodigo = "000001";
 //                                    dtFinal.add(Calendar.HOUR, -8);
                                     Map<String,Object> mapAnds4Req = new HashMap<String, Object>();
@@ -236,11 +261,12 @@ public class PdfRelMakerPendencias {
                                     listOrs4Req.add("006");
                                     listOrs4Req.add("007");
                                     listOrs4Req.add("008");
-//                                    listOrs4Req.add("016");
+                                    listOrs4Req.add("016");
                                     
                                     Map<String,Object> mapAnds4Det = new HashMap<String, Object>();
                                     mapAnds4Det.put("uniStCodigo", uniStCodigo);
                                        mapAnds4Det.put("oriStCodigo", oriStCodigo);
+//                                       mapAnds4Det.put("derChFatura", 'N');
 //                                    mapAnds4Det.put("exaStCodigo", new LabExame("URI"));
 //                                    mapAnds4Det.put("legStCodigo", "007");
                                     
@@ -253,7 +279,7 @@ public class PdfRelMakerPendencias {
 //                                    listOrs4Det.add("006");
                                     listOrs4Det.add("007");
                                     listOrs4Det.add("008");
-//                                    listOrs4Det.add("016");
+                                    listOrs4Det.add("016");
                                     
                                     Document doc = geraPdfPendencias("firstPdftest.pdf",
                                             dtInicio.getTime(), dtFinal.getTime(),

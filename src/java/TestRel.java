@@ -23,7 +23,8 @@ public class TestRel {
 //        List list = OracleHelper.getListOfObjectByKeyEq(LabRequisicao.class, "reqStCodigo", "1139365702", "reqStCodigo", true);
         
         
-        System.out.println(new Double(25).intValue());
+//        System.out.println(new Double(25).intValue());
+        System.out.println("AMI(EA), BIL(EA), CRE(EA), GLI(EA), HEM(EA), LIP(EA), MB(EA), MIOG(CO), POT(EA), PTF(EA), SOD(EA), TGO(EA), TGP(EA), TP(EA), TRO(EA), TTPA(EA), URE(EA), URI(EA)".length());
 //        System.out.println(user.getUsuStNome());
         
 //        float f = 1.2f;

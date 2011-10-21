@@ -150,7 +150,7 @@ public class PdfBodyContent {
                                 tableHeaderBotton.addCell(cell1);
                                 
                                 cell1 = new PdfPCell();
-                                cell1.addElement(new Phrase(new Paragraph("                                         Data/Hora: "+formater2.format(new Date())+" Página: "+pagina,smallBold8)));
+                                cell1.addElement(new Phrase(new Paragraph("                                                                    Data/Hora: "+formater2.format(new Date())+" Página: "+pagina,smallBold8)));
                                 cell1.setBorder(Rectangle.NO_BORDER);
                                 cell1.setBackgroundColor(BaseColor.LIGHT_GRAY);
                                 tableHeaderBotton.addCell(cell1);
@@ -277,7 +277,14 @@ public class PdfBodyContent {
                                     contentTable.setWidthPercentage(100);
                                     PdfPCell cell1 = new PdfPCell();
                                     cell1.setBorder(Rectangle.NO_BORDER);
-                                    cell1.addElement(new Phrase(labReq.getListTextExames(),smallBold7));
+                                    
+                                    
+                                    if(labReq.getListTextExames().length()>160){
+                                        cell1.addElement(new Phrase(labReq.getListTextExames(),smallNormal7));
+                                    }else{
+                                        cell1.addElement(new Phrase(labReq.getListTextExames(),smallBold7));
+                                    }
+                                    
                                     cell1.setPadding(0);
                                     cell1.setPaddingLeft(5f);
                                     contentTable.addCell(cell1);

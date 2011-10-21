@@ -351,13 +351,19 @@ public class LabRequisicao implements Serializable{
     public String getListTextExames(){
         StringBuilder sb = new StringBuilder();
         if(listLabDetalheRequisicaoFiltrado != null && listLabDetalheRequisicaoFiltrado.size()>0){
-            
+            boolean bltIghterText = false;
             for(int i = 0 ; i < listLabDetalheRequisicaoFiltrado.size(); i ++){
                 LabDetalheRequisicao ldr = listLabDetalheRequisicaoFiltrado.get(i);
+                bltIghterText = listLabDetalheRequisicaoFiltrado.size() > 17 ?  true : false; 
                 sb.append(ldr.getExaStCodigo())
                         .append(ArrayItens.getMapLegResumido().get(ldr.getLegStCodigo()));
                 
-                if(i < listLabDetalheRequisicaoFiltrado.size()-1){sb.append(" , ");}
+                if(bltIghterText){
+                    if(i < listLabDetalheRequisicaoFiltrado.size()-1){sb.append(", ");}
+                }else{
+                    if(i < listLabDetalheRequisicaoFiltrado.size()-1){sb.append(" , ");}
+                }
+                
                 
             }
         }
