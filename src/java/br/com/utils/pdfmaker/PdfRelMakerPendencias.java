@@ -75,7 +75,7 @@ public class PdfRelMakerPendencias {
                    
                    
                     
-                            Double dMaxPages = 25d;
+                            Double dMaxPages = 27d;
                         
                            document = PdfBodyContent.addMetaData(document);
                            double dPages = listRequisicao.size()/dMaxPages;
@@ -90,7 +90,7 @@ public class PdfRelMakerPendencias {
                         
                         int reqs4Pages = dMaxPages.intValue();
                             
-                            for(int i = 0 ; i < listRequisicao.size(); i ++){
+                            for(int i = 1 ; i < listRequisicao.size(); i ++){
                                 
                                     LabRequisicao lr = listRequisicao.get(i);
                                   
@@ -106,7 +106,7 @@ public class PdfRelMakerPendencias {
                                                         writer.setPageEmpty(false);
                                                         document = PdfBodyContent.addMetaData(document);
                                                         ++iPages;
-                                                        document.add(PdfBodyContent.addTitlePage(dtIncio,dtFinal,"Unidade",iPages.toString()+"/"+sPages ));
+                                                        document.add(PdfBodyContent.addTitlePage(dtIncio,dtFinal,unidadeDesc,iPages.toString()+"/"+sPages ));
                                                         document.add(PdfBodyContent.makeTablesHeader());
                                                         flPdfHeigh = flPdfHeigh+flA4MaxHeigh;
                                                         reqs4Pages = reqs4Pages+dMaxPages.intValue();
@@ -148,8 +148,7 @@ public class PdfRelMakerPendencias {
             long fim = new Date().getTime();
             System.out.println("Tempo gasto p lista de LabRequisicoes: "+(new Long((fim-comeco)/1000)));
             List<LabRequisicao>  listReqRetorno;
-            if(listReq != null &&
-                    ! listOrs4Req.isEmpty()){
+            if(listReq != null ){
                 comeco = new Date().getTime();
                 for(LabRequisicao lr : listReq){
                     mapAnds4Det.put("reqStCodigo", lr.getReqStCodigo());
@@ -234,8 +233,8 @@ public class PdfRelMakerPendencias {
 //                                System.out.println(PageSize.A4.getHeight()); 
                     
                                     Calendar dtInicio = Calendar.getInstance();
-//                                    dtInicio.add(Calendar.DAY_OF_YEAR, -30);
-                                    dtInicio.add(Calendar.HOUR_OF_DAY, -1);
+                                    dtInicio.add(Calendar.DAY_OF_YEAR, -30);
+//                                    dtInicio.add(Calendar.HOUR_OF_DAY, -30);
                                     Calendar dtFinal = Calendar.getInstance();
                                     String uniStCodigo = "HAS";
                                     String oriStCodigo = "000001";
@@ -253,15 +252,15 @@ public class PdfRelMakerPendencias {
                                     
                                     
                                     List listOrs4Req = new ArrayList ();
-                                    listOrs4Req.add("001");
-                                    listOrs4Req.add("002");
-                                    listOrs4Req.add("003");
-                                    listOrs4Req.add("004");
-                                    listOrs4Req.add("005");
-                                    listOrs4Req.add("006");
-                                    listOrs4Req.add("007");
-                                    listOrs4Req.add("008");
-                                    listOrs4Req.add("016");
+//                                    listOrs4Req.add("001");
+//                                    listOrs4Req.add("002");
+//                                    listOrs4Req.add("003");
+//                                    listOrs4Req.add("004");
+//                                    listOrs4Req.add("005");
+//                                    listOrs4Req.add("006");
+//                                    listOrs4Req.add("007");
+//                                    listOrs4Req.add("008");
+//                                    listOrs4Req.add("016");
                                     
                                     Map<String,Object> mapAnds4Det = new HashMap<String, Object>();
                                     mapAnds4Det.put("uniStCodigo", uniStCodigo);
@@ -271,15 +270,15 @@ public class PdfRelMakerPendencias {
 //                                    mapAnds4Det.put("legStCodigo", "007");
                                     
                                     List listOrs4Det = new ArrayList ();
-                                    listOrs4Det.add("001");
-                                    listOrs4Det.add("002");
-//                                    listOrs4Det.add("003");
-                                    listOrs4Det.add("004");
-//                                    listOrs4Det.add("005");
-//                                    listOrs4Det.add("006");
-                                    listOrs4Det.add("007");
-                                    listOrs4Det.add("008");
-                                    listOrs4Det.add("016");
+//                                    listOrs4Det.add("001");
+//                                    listOrs4Det.add("002");
+////                                    listOrs4Det.add("003");
+//                                    listOrs4Det.add("004");
+////                                    listOrs4Det.add("005");
+////                                    listOrs4Det.add("006");
+//                                    listOrs4Det.add("007");
+//                                    listOrs4Det.add("008");
+//                                    listOrs4Det.add("016");
                                     
                                     Document doc = geraPdfPendencias("firstPdftest.pdf",
                                             dtInicio.getTime(), dtFinal.getTime(),

@@ -3577,7 +3577,7 @@ public static List<LabConfigIngresso> getListLabConfiruraConfigIngressos(String 
    
    static public  List getListObjectsByAnds_Ors_Dates
            
-           (Class myClass,Map<String,Object> mapArgsAnds,String strFieldName,List listArgsOrs,String strDateFieldName,Date dtStart,Date dtEnd){
+           (Class myClass,Map<String,Object> mapArgsAnds,String strFieldNameOrs,List listArgsOrs,String strDateFieldName,Date dtStart,Date dtEnd){
 
         
         List<LabConfigIngresso> result = null;
@@ -3615,9 +3615,9 @@ public static List<LabConfigIngresso> getListLabConfiruraConfigIngressos(String 
             
             
             
-            if(listArgsOrs != null && listArgsOrs.size()>0){
+            if(listArgsOrs != null && listArgsOrs.size()>0  && strFieldNameOrs != null){
                 Disjunction disj;
-            Property property = Property.forName(strFieldName);
+            Property property = Property.forName(strFieldNameOrs);
    
                     if(listArgsOrs != null && listArgsOrs.size()>0){
                         disj = Restrictions.disjunction();
