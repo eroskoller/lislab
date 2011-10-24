@@ -3,6 +3,7 @@ import br.com.hibernate.entities.LabDetalheRequisicao;
 import br.com.hibernate.entities.LabRequisicao;
 import br.com.hibernate.entities.LabUsuario;
 import br.com.hibernate.utils.OracleHelper;
+import java.io.File;
 import java.util.List;
 
 /*
@@ -24,11 +25,14 @@ public class TestRel {
         
         
 //        System.out.println(new Double(25).intValue());
-        System.out.println("AMI(EA), BIL(EA), CRE(EA), GLI(EA), HEM(EA), LIP(EA), MB(EA), MIOG(CO), POT(EA), PTF(EA), SOD(EA), TGO(EA), TGP(EA), TP(EA), TRO(EA), TTPA(EA), URE(EA), URI(EA)".length());
+//        System.out.println("AMI(EA), BIL(EA), CRE(EA), GLI(EA), HEM(EA), LIP(EA), MB(EA), MIOG(CO), POT(EA), PTF(EA), SOD(EA), TGO(EA), TGP(EA), TP(EA), TRO(EA), TTPA(EA), URE(EA), URI(EA)".length());
 //        System.out.println(user.getUsuStNome());
         
 //        float f = 1.2f;
 //        System.out.println(Math.ceil(f));
+        
+        File file = new File("some file that dind't exists");
+        System.out.println(file.exists());
     }
     
 }

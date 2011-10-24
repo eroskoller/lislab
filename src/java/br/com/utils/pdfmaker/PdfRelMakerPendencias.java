@@ -234,10 +234,11 @@ public class PdfRelMakerPendencias {
                     
                                     Calendar dtInicio = Calendar.getInstance();
                                     dtInicio.add(Calendar.DAY_OF_YEAR, -30);
-//                                    dtInicio.add(Calendar.HOUR_OF_DAY, -30);
+//                                    dtInicio.add(Calendar.HOUR_OF_DAY, -1);
                                     Calendar dtFinal = Calendar.getInstance();
-                                    String uniStCodigo = "HAS";
-                                    String oriStCodigo = "000001";
+                                    String uniStCodigo = "SPS";
+                                    String derStUnidadeEx = "ACL";
+                                    String oriStCodigo = "000155";
 //                                    dtFinal.add(Calendar.HOUR, -8);
                                     Map<String,Object> mapAnds4Req = new HashMap<String, Object>();
 //                                    mapAnds4Req.put("reqStCodigo", "1139365702");
@@ -265,8 +266,8 @@ public class PdfRelMakerPendencias {
                                     Map<String,Object> mapAnds4Det = new HashMap<String, Object>();
                                     mapAnds4Det.put("uniStCodigo", uniStCodigo);
                                        mapAnds4Det.put("oriStCodigo", oriStCodigo);
-//                                       mapAnds4Det.put("derChFatura", 'N');
-//                                    mapAnds4Det.put("exaStCodigo", new LabExame("URI"));
+                                       mapAnds4Det.put("derStUnidadeEx", derStUnidadeEx);
+//                                    mapAnds4Det.put("exaStCodigo", new LabExame("URI"));=
 //                                    mapAnds4Det.put("legStCodigo", "007");
                                     
                                     List listOrs4Det = new ArrayList ();
@@ -280,7 +281,7 @@ public class PdfRelMakerPendencias {
 //                                    listOrs4Det.add("008");
 //                                    listOrs4Det.add("016");
                                     
-                                    Document doc = geraPdfPendencias("firstPdftest.pdf",
+                                    Document doc = geraPdfPendencias("firstPdftestOneHr.pdf",
                                             dtInicio.getTime(), dtFinal.getTime(),
                                            mapAnds4Req , 
                                            "legStCodigo", listOrs4Req, 
