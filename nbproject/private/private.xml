@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1">
+        <file>
+            <url>src/java/br/com/utils/pdfmaker/PdfBodyContent.java</url>
+            <line>282</line>
+        </file>
+        <file>
+            <url>src/java/br/com/utils/pdfmaker/PdfRelMakerPendencias.java</url>
+            <line>154</line>
+            <line>236</line>
+        </file>
+    </editor-bookmarks>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
+        <file>file:/home/eros/Shop/rel/web/WEB-INF/web.xml</file>
+        <file>file:/home/eros/Shop/rel/web/layoutComplex.xhtml</file>
+        <file>file:/home/eros/Shop/rel/web/themeMenu.xhtml</file>
+        <file>file:/home/eros/Shop/rel/web/accordionPanel.xhtml</file>
+        <file>file:/home/eros/Shop/rel/src/java/br/com/facesbeans/layout/LayoutBean.java</file>
+        <file>file:/home/eros/Shop/rel/web/layoutFull.xhtml</file>
+        <file>file:/home/eros/Shop/rel/src/java/br/com/facesbeans/layout/GuestPreferences.java</file>
+        <file>file:/home/eros/Shop/rel/src/java/br/com/facesbeans/layout/RequestContext.java</file>
+        <file>file:/home/eros/Shop/rel/web/telacheia.xhtml</file>
+    </open-files>
+</project-private>
