@@ -1,0 +1,49 @@
+<html xmlns="http://www.w3.org/1999/xhtml"  
+    xmlns:h="http://java.sun.com/jsf/html"  
+    xmlns:p="http://primefaces.prime.com.tr/ui"
+      
+    xmlns:f="http://java.sun.com/jsf/core" >  
+  
+    <h:head>  </h:head>  
+      
+    <h:body>   
+      
+        <h:form>
+            
+            
+            <p:ajaxStatus>
+            
+                                    <f:facet name="prestart">
+                                        <h:outputText value="Starting..." />
+                                    </f:facet>
+
+                                    <f:facet name="error">
+                                        <h:outputText value="Error" />
+                                    </f:facet>
+
+                                    <f:facet name="success">
+                                        <h:outputText value="Success" />
+                                    </f:facet>
+
+                                    <f:facet name="default">
+                                        <h:outputText value="Idle" />
+                                    </f:facet>
+
+                                    <f:facet name="start">
+                                        <h:graphicImage value="loading-100x100.gif" />  
+                                        <h:outputText value="Please Wait" />
+                                    </f:facet>
+
+                                    <f:facet name="complete">
+                                        <h:outputText value="Done" />
+                                    </f:facet>
+                                   
+
+                
+            </p:ajaxStatus>
+        
+        </h:form>
+        
+    </h:body>  
+    
+</html>  

@@ -1,0 +1,34 @@
+<html xmlns="http://www.w3.org/1999/xhtml"  
+    xmlns:h="http://java.sun.com/jsf/html"  
+    xmlns:p="http://primefaces.prime.com.tr/ui"
+    xmlns:f="http://java.sun.com/jsf/core" >  
+  
+    <h:head>  </h:head>  
+      
+    <h:body>   
+      
+        <h:form>
+        
+          
+            <p:button outcome="productDetail" value="Bookmark" image="bookmark">  
+                <f:param name="productId" value="10" />  
+            </p:button>  
+
+            <p:button outcome="productDetail" value="With Icon" image="bookmark">  
+                <f:param name="productId" value="20" />  
+            </p:button>  
+
+            <p:button outcome="productDetail" image="bookmark">  
+                <f:param name="productId" value="30" />  
+            </p:button>  
+
+            <p:button outcome="productDetail" value="Bookmark" image="bookmark" disabled="true" title="iconOnly">  
+                <f:param name="productId" value="40" />  
+            </p:button>  
+            
+          
+        </h:form>
+        
+    </h:body>  
+    
+</html>  

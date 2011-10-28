@@ -1,0 +1,144 @@
+<html xmlns="http://www.w3.org/1999/xhtml"  
+    xmlns:h="http://java.sun.com/jsf/html"  
+    xmlns:p="http://primefaces.prime.com.tr/ui"
+    xmlns:c="http://java.sun.com/jsp/jstl/core" >  
+  
+    <h:head>  
+    
+    
+        <script type="text/javascript" >
+            
+	
+                        var piechartStyle = {
+
+
+                        padding:20,
+
+
+                        legend: {
+
+
+
+                        display:"right"
+
+
+
+                        ,spacing:10
+
+
+                        }
+
+                        };
+</script>
+
+
+<script type="text/javascript">  
+    
+    var chartStyle = {  
+        border: {color: 0x96acb4, size: 12},  
+        background: {  
+            image : "../design/bg.jpg"  
+        },  
+        font: {name: "Arial Black", size: 14, color: 0x586b71},  
+        dataTip:  
+        {  
+            border: {color: 0x2e434d, size: 2},  
+            font: {name: "Arial Black", size: 13, color: 0x586b71}  
+        },  
+        xAxis:  
+        {  
+            color: 0x2e434d  
+        },  
+        yAxis:  
+        {  
+            color: 0x2e434d,  
+            majorTicks: {color: 0x2e434d, length: 4},  
+            minorTicks: {color: 0x2e434d, length: 2},  
+            majorGridLines: {size: 0}  
+        }  
+    };  
+  
+    var cpuStyle =  
+        {  
+            image: "../design/column.png",  
+            mode: "no-repeat",  
+            color: 0x3399FF,  
+            size: 35  
+        };  
+  
+    var memoryStyle =  
+    {  
+        image: "../design/column.png",  
+        mode: "no-repeat",  
+        color: 0xFF66CC,  
+        size: 35  
+    };  
+</script>
+
+        
+    
+    </h:head>  
+      
+    <h:body>   
+      
+        <h:form>
+            
+            
+            <p:growl id="growl" showDetail="true" />  
+            
+            <h:panelGrid columns="3">
+            
+                
+                 <p:pieChart value="#{primeSamplesBean.sales}" var="sale" categoryField="#{sale.brand}"  
+                             dataField="#{sale.amount}"  
+                             style="piechartStyle" />  
+                 
+                 
+                 <p:pieChart 
+                     height="50px;" width="50px;" 
+                        value="#{chartBean.votes}" var="vote"  
+                        live="true" refreshInterval="300000"  
+                        categoryField="#{vote.candidate}" dataField="#{vote.count}"  
+                        />  
+                 
+                 
+                 
+                 
+                 <p:lineChart    value="#{chartBean.births}" var="birth" xfield="#{birth.year}"   >
+                     
+                    <p:chartSeries label="Boys" value="#{birth.boys}" />  
+                    <p:chartSeries label="Girls" value="#{birth.girls}" />  
+
+                </p:lineChart>
+                 
+                 
+                 
+                 
+                 <p:columnChart value="#{chartBean.births}" var="birth" xfield="#{birth.year}"  >
+                    <p:chartSeries label="Boys" value="#{birth.boys}" />  
+                    <p:chartSeries label="Girls" value="#{birth.girls}" />  
+                </p:columnChart> 
+                 
+                 
+                 <p:stackedColumnChart value="#{chartBean.births}" var="birth"   
+                                       xfield="#{birth.year}" >
+                <p:chartSeries label="Boys" value="#{birth.boys}" />  
+                <p:chartSeries label="Girls" value="#{birth.girls}" />  
+            </p:stackedColumnChart>  
+                 
+                 
+                 <p:barChart value="#{chartBean.births}" var="birth"  
+                             yfield="#{birth.year}" >
+                    <p:chartSeries label="Boys" value="#{birth.boys}" />  
+                    <p:chartSeries label="Girls" value="#{birth.girls}" />  
+                </p:barChart>
+                 
+         
+                 
+                 </h:panelGrid>
+   
+        
+        </h:form>
+    </h:body>  
+    
+</html>  

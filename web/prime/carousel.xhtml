@@ -1,0 +1,49 @@
+<html xmlns="http://www.w3.org/1999/xhtml"  
+    xmlns:h="http://java.sun.com/jsf/html"  
+    xmlns:p="http://primefaces.prime.com.tr/ui"
+    xmlns:f="http://java.sun.com/jsf/core" >  
+  
+    <h:head>  </h:head>  
+      
+    <h:body>   
+      
+        <h:form>
+        
+          
+                    <h3>elasticIn</h3>  
+                    
+                    
+                    
+                    <p:carousel value="#{primeSamplesBean.carsSmall}" var="car" itemStyleClass="carItem"  
+                                effect="elasticIn"  >  
+                        
+                       
+                            
+                            <p:graphicImage value="/images/cars/#{car.manufacturer}.jpg"/>   
+
+                            <h:outputText value="Model: #{car.model}" />  
+
+                            <h:outputText value="Year: #{car.year}" />  
+
+                            <h:outputText value="Color: #{car.color}" />  
+                            
+                       
+                    </p:carousel>  
+
+                    <h3>easeInStrong</h3>  
+                    <p:carousel value="#{primeSamplesBean.carsSmall}" var="car" itemStyleClass="carItem"  
+                                effect="easeInStrong" >  
+                       
+                            <p:graphicImage value="/images/cars/#{car.manufacturer}.jpg"/>   
+                            <h:outputText value="Model: #{car.model}" />  
+                            <h:outputText value="Year: #{car.year}" />  
+                            <h:outputText value="Color: #{car.color}" />  
+                       
+                    </p:carousel> 
+                    
+          
+        </h:form>
+        
+    </h:body>  
+    
+</html>  

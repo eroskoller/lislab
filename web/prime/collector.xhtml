@@ -1,0 +1,109 @@
+<html xmlns="http://www.w3.org/1999/xhtml"  
+    xmlns:h="http://java.sun.com/jsf/html"  
+    xmlns:p="http://primefaces.prime.com.tr/ui"
+    xmlns:f="http://java.sun.com/jsf/core" >  
+  
+    <h:head>  
+    
+    
+        <script type="text/javascript">
+            
+            
+            function pointFocus(){
+                
+                document.getElementById("form:authorinput").focus();
+            }
+            
+        </script>
+    
+    </h:head>  
+      
+    <h:body>   
+      
+        <h:form  id="form" >
+        
+          
+                    <h3>collector</h3>  
+                    
+                     <p:growl id="msgs" />
+                     
+                     <p:focus   for="authorinput"   context="books" />
+                    
+                    <h:panelGrid columns="2">
+                            
+                        <h:outputLabel value="Author"/>
+                        <p:inputText   id="authorinput"   style="width: 200px;"  value="#{collectorBean.book.author}"   binding="#{collectorBean.textAuthor}" />
+
+                        <h:outputLabel value="Title"/>
+                        <p:inputText style="width: 200px;"  value="#{collectorBean.book.title}"/>
+                        
+                        
+                        
+                    </h:panelGrid>
+                    
+                    <p:commandButton value="Save" update="books msgs @parent"    action="#{collectorBean.reinit}"  > 
+                        
+                            <p:collector value="#{collectorBean.book}" addTo="#{collectorBean.books}" />
+                            
+                    </p:commandButton>
+                                
+                    <p:commandButton value="Reset"  update="books msgs @parent"   action="#{collectorBean.cleanUpEveryThing()}"  > 
+                        
+                    </p:commandButton>
+                    
+                    
+                    
+                    <p:ajaxStatus style="width:16px;height:16px;   position: absolute; top: 0px;  left: 94%; ">  
+                        <f:facet name="start">  
+                            <h:graphicImage value="loading-100x100.gif" />  
+                        </f:facet>  
+
+                        <f:facet name="complete">  
+                            <h:outputText value="" />  
+                        </f:facet>  
+                    </p:ajaxStatus>  
+                      
+                    
+                    
+                    <p:outputPanel id="books">  
+                        <p:dataTable value="#{collectorBean.books}" var="book">  
+
+                        <p:column>  
+                            <f:facet name="header">  
+                                <h:outputText value="Title" />  
+                            </f:facet>  
+                            <h:outputText value="#{book.title}" />  
+                        </p:column>  
+
+                        <p:column>  
+                            <f:facet name="header">  
+                                <h:outputText value="Author" />  
+                            </f:facet>  
+                            <h:outputText value="#{book.author}" />  
+                        </p:column>
+                            
+                            
+                         <p:column>
+		<f:facet name="header">
+                                            <h:outputText value="Operation" />
+		</f:facet>
+                             <p:commandLink value="Remove" update="form:books" process="@this"    >
+                    
+                                            <p:collector value="#{book}"    removeFrom="#{collectorBean.books}" />
+                                            
+		</p:commandLink>
+	         </p:column>
+
+                       
+
+                    </p:dataTable>  
+                </p:outputPanel>  
+                    
+                    
+                 
+          
+        </h:form>
+        
+    </h:body>  
+    
+</html>  

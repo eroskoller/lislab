@@ -1,0 +1,81 @@
+<html xmlns="http://www.w3.org/1999/xhtml"  
+    xmlns:h="http://java.sun.com/jsf/html"  
+    xmlns:p="http://primefaces.prime.com.tr/ui"
+    xmlns:c="http://java.sun.com/jsp/jstl/core" 
+    xmlns:f="http://java.sun.com/jsf/core">
+    
+      <h:head>  </h:head> 
+      
+      
+      
+   <h:panelGrid columns="11" cellpadding="5">  
+    <p:commandButton value="Basic" onclick="dlg1.show();" type="button"/>  
+      
+    <p:commandButton value="Modal" onclick="dlg2.show();" type="button"/>  
+      
+    <p:commandButton value="Effects" onclick="dlg3.show();" type="button"/>  
+    
+    <p:commandButton value="Modal NoDrag" onclick="dlg4.show();" type="button"/>  
+    
+    <p:commandButton value="dlg5"    onclick="dlg5.show();" type="button"/>  
+    
+    <p:commandButton value="dlg6" onclick="dlg6.show();" type="button"/>  
+    
+    <p:commandButton value="dlg7" onclick="dlg7.show();" type="button"/>  
+    
+    <p:commandButton value="dlg8" onclick="dlg8.show();" type="button"/>  
+    
+    <p:commandButton value="dlg9" onclick="dlg9.show();" type="button"/>  
+    
+    <p:commandButton value="dlg10" onclick="dlg10.show();" type="button"/>  
+    
+    <p:commandButton value="dlg11" onclick="dlg11.show();" type="button"/>  
+    
+</h:panelGrid>  
+                  
+<p:dialog header="Basic Dialog" widgetVar="dlg1">  
+    <h:outputText value="Resistance to PrimeFaces is futile!" />  
+</p:dialog>     
+  
+<p:dialog header="Modal Dialog" widgetVar="dlg2" modal="true" height="200">  
+    <h:outputText value="This is a Modal Dialog." />  
+</p:dialog>     
+  
+<p:dialog header="Effect Dialog" widgetVar="dlg3" showEffect="bounce" hideEffect="explode" height="200">  
+    <h:outputText value="This dialog has cool effects." />  
+</p:dialog> 
+      
+      <p:dialog header="Effect Dialog" widgetVar="dlg4" showEffect="explode"  modal="true" draggable="false"  hideEffect="explode" height="200">  
+    <h:outputText value="This dialog has cool effects." />  
+</p:dialog> 
+      
+      <p:dialog header="Effect Dialog" widgetVar="dlg5" showEffect="fade" hideEffect="drop" height="200">  
+    <h:outputText value="This dialog has cool effects." />  
+</p:dialog> 
+      
+      <p:dialog header="Effect Dialog" widgetVar="dlg6" showEffect="dodge" hideEffect="clip" height="200">  
+    <h:outputText value="This dialog has cool effects." />  
+</p:dialog> 
+      
+      <p:dialog header="Effect Dialog" widgetVar="dlg7" showEffect="blind" hideEffect="fold" height="200">  
+    <h:outputText value="This dialog has cool effects." />  
+</p:dialog> 
+      
+      <p:dialog header="Effect Dialog" widgetVar="dlg8" showEffect="scale" hideEffect="bounce" height="200">  
+    <h:outputText value="This dialog has cool effects." />  
+</p:dialog> 
+      
+      <p:dialog header="Effect Dialog" widgetVar="dlg9" showEffect="shake" hideEffect="pulsate" height="200">  
+    <h:outputText value="This dialog has cool effects." />  
+</p:dialog> 
+      
+      <p:dialog header="Effect Dialog" widgetVar="dlg10" showEffect="puff" hideEffect="size" height="200">  
+    <h:outputText value="This dialog has cool effects." />  
+</p:dialog> 
+      
+      <p:dialog header="Effect Dialog" widgetVar="dlg11" showEffect="puff" hideEffect="explode" height="200">  
+    <h:outputText value="This dialog has cool effects." />  
+</p:dialog> 
+      
+      
+</html>

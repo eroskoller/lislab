@@ -1,0 +1,107 @@
+<html xmlns="http://www.w3.org/1999/xhtml"  
+    xmlns:h="http://java.sun.com/jsf/html"  
+    xmlns:p="http://primefaces.prime.com.tr/ui"
+    xmlns:f="http://java.sun.com/jsf/core" >  
+  
+    <h:head>  </h:head>  
+      
+    <h:body>   
+      
+        <h:form>
+            
+            
+            <h:panelGrid columns="2">
+            
+        <p:growl id="growl" showDetail="true"/>  
+          
+            
+     <h3>Inline</h3>  
+            <p:calendar value="#{primeSamplesBean.date1}" mode="inline"/>   
+      
+    <h3>Popup</h3>  
+    <p:calendar value="#{primeSamplesBean.date2}"   style="width: 100px;"  />  
+      
+    <h3>Popup Button</h3>  
+    <p:calendar value="#{primeSamplesBean.date3}" showOn="button" />  
+    
+    
+   
+   
+                  
+    <p:calendar value="#{primeSamplesBean.date1}" mode="inline"   
+            onSelectUpdate="growl"   
+            selectListener="#{primeSamplesBean.handleDateSelect}"/>     
+    
+
+  
+    <h:panelGrid columns="2" style="margin-top:10px">  
+        <p:commandButton value="Submit" update="display" oncomplete="dialog.show()"/>  
+      
+        <p:ajaxStatus style="width:16px;height:16px;">  
+            <f:facet name="start">  
+                <h:graphicImage value="../design/ajaxloading.gif" />  
+            </f:facet>  
+              
+            <f:facet name="complete">  
+                <h:outputText value="" />  
+            </f:facet>  
+        </p:ajaxStatus>  
+        
+        
+    </h:panelGrid>  
+      
+    <p:dialog header="Selected Dates" widgetVar="dialog"   
+            showEffect="fold" hideEffect="fold"  
+            height="150">  
+      
+        <h:panelGrid id="display" columns="2" cellpadding="5">  
+          
+            <h:outputText value="Inline Date:" />  
+            <h:outputText value="#{primeSamplesBean.date1}">  
+                <f:convertDateTime pattern="MM/dd/yyyy"/>  
+            </h:outputText>  
+              
+            <h:outputText value="Popup Date:" />  
+            <h:outputText value="#{primeSamplesBean.date2}">  
+                <f:convertDateTime pattern="MM/dd/yyyy"/>  
+            </h:outputText>  
+              
+            <h:outputText value="Popup Button Date: " />  
+            <h:outputText value="#{primeSamplesBean.date4}">  
+                <f:convertDateTime pattern="MM/dd/yyyy"/>  
+            </h:outputText>  
+              
+        </h:panelGrid>  
+          
+    </p:dialog>  
+            
+            </h:panelGrid>
+            
+            
+            
+            
+            
+            <h:panelGrid columns="3" cellpadding="5" style="width:100%">  
+    <h:outputText value="Fade" />  
+    <h:outputText value="Slide Horizontal" />  
+    <h:outputText value="Slide Vertical" />  
+      
+    <p:calendar effect="fadeIn"/>   
+    <p:calendar effect="slide" />  
+    <p:calendar effect="slideDown" />   
+      
+    <h:outputText value="Explode" />  
+    <h:outputText value="Fold" />  
+    <h:outputText value="Drop" />  
+      
+    <p:calendar effect="explode"/>      
+    <p:calendar effect="fold" />  
+    <p:calendar effect="drop" />    
+</h:panelGrid>  
+            
+            
+        </h:form>
+        
+    </h:body>  
+    
+</html>  

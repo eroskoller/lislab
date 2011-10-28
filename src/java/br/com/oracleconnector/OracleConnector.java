@@ -3227,7 +3227,14 @@ String query2 =
     }
 
 
-
+public static void main(String... args){
+    Connection conn = OracleConnector.connectOrDie();
+    
+    if(conn != null){
+        System.out.println("Working....");
+    }
+    
+}
 
 
 

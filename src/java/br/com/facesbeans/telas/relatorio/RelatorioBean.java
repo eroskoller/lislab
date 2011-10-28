@@ -81,14 +81,15 @@ public class RelatorioBean implements Serializable{
    private boolean blDevMat;
    private boolean blRemarcado;
    private boolean blPreConf;
-   private boolean blNaoConficad;
+   
    
    
     private boolean blOmitidos;
     private boolean blParcial;
     
-    private boolean blConfFat;
+   private boolean blnNaoConfFat;
    private boolean blFaturados;
+   private boolean blNaoConficad;
    
    
     

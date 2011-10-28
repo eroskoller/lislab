@@ -1,0 +1,59 @@
+<html xmlns="http://www.w3.org/1999/xhtml"  
+    xmlns:h="http://java.sun.com/jsf/html"  
+    xmlns:p="http://primefaces.prime.com.tr/ui"
+    xmlns:c="http://java.sun.com/jsp/jstl/core" 
+    xmlns:f="http://java.sun.com/jsf/core">
+    
+      <h:head>  </h:head>  
+    
+    <h:form prependId="false">  
+  
+        <p:dataGrid var="car" value="#{dataGridBean.cars}" columns="4"  
+        rows="10" paginator="true" effect="true"  
+        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+        rowsPerPageTemplate="9,12,15,17,20"
+        effectSpeed="500"
+        paginatorPosition="both"
+        >  
+          
+        <p:column>  
+            <p:panel header="#{car.model}" style="text-align:center">  
+                <h:panelGrid columns="1" style="width:100%">  
+                    <p:graphicImage value="/images/cars/#{car.manufacturer}.jpg"/>   
+                  
+                    <h:outputText value="#{car.year}" />  
+                      
+                    <p:commandLink update="carDetail" oncomplete="carDialog.show()" title="View Detail">  
+                        <p:graphicImage value="/images/search.png"/>   
+                        <f:setPropertyActionListener value="#{car}"   
+                                target="#{dataGridBean.selectedCar}" />  
+                    </p:commandLink>  
+                </h:panelGrid>  
+            </p:panel>  
+        </p:column>  
+  
+    </p:dataGrid>  
+      
+    <p:dialog header="Car Detail" widgetVar="carDialog" width="200" height="175" modal="true">  
+        <p:outputPanel id="carDetail" style="text-align:center;" layout="block">  
+          
+            <p:graphicImage value="/images/cars/#{dataGridBean.selectedCar.manufacturer}.jpg"/>  
+              
+            <h:panelGrid  columns="2" cellpadding="5">  
+                <h:outputLabel for="modelNo" value="Model No: " />  
+                <h:outputText id="modelNo" value="#{dataGridBean.selectedCar.model}" />  
+                  
+                <h:outputLabel for="year" value="Year: " />  
+                <h:outputText id="year" value="#{dataGridBean.selectedCar.year}" />  
+                  
+                <h:outputLabel for="color" value="Color: " />  
+                <h:outputText id="color" value="#{dataGridBean.selectedCar.color}" style="color:#{tableBean.selectedCar.color}"/>  
+            </h:panelGrid>  
+        </p:outputPanel>  
+    </p:dialog>  
+  
+</h:form>
+    
+    
+    
+</html>

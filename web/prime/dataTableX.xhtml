@@ -1,0 +1,82 @@
+<html xmlns="http://www.w3.org/1999/xhtml"  
+    xmlns:h="http://java.sun.com/jsf/html"  
+    xmlns:p="http://primefaces.prime.com.tr/ui"
+    xmlns:c="http://java.sun.com/jsp/jstl/core" 
+    xmlns:f="http://java.sun.com/jsf/core">
+    
+      <h:head>  </h:head> 
+      
+      <h:form>  
+  
+          <p:dataTable var="car" value="#{dataTableX.cars}" paginator="true" rows="10"  
+                selection="#{dataTableX.selectedCar}" selectionMode="single"  
+                onRowSelectUpdate="display" onRowSelectComplete="carDialog.show()">  
+  
+        <f:facet name="header">  
+            List of Cars  
+        </f:facet>  
+  
+        <p:column sortBy="#{car.model}" filterBy="#{car.model}">  
+            <f:facet name="header">  
+                <h:outputText value="Model" />  
+            </f:facet>  
+            <h:outputText value="#{car.model}" />  
+        </p:column>  
+  
+        <p:column sortBy="#{car.year}" filterBy="#{car.year}">  
+            <f:facet name="header">  
+                <h:outputText value="Year" />  
+            </f:facet>  
+            <h:outputText value="#{car.year}" />  
+        </p:column>  
+  
+        <p:column sortBy="#{car.manufacturer}" filterBy="#{car.manufacturer}">  
+            <f:facet name="header">  
+                <h:outputText value="Manufacturer" />  
+            </f:facet>  
+            <h:outputText value="#{car.manufacturer}" />  
+        </p:column>  
+  
+        <p:column sortBy="#{car.color}" filterBy="#{car.color}">  
+            <f:facet name="header">  
+                <h:outputText value="Color" />  
+            </f:facet>  
+            <h:outputText value="#{car.color}" />  
+        </p:column>  
+  
+    </p:dataTable>  
+  
+    <p:dialog 
+        header="Car Detail" 
+        widgetVar="carDialog" 
+        resizable="false"  
+              width="200" 
+              showEffect="explode" 
+              hideEffect="explode"
+              >  
+  
+        <h:panelGrid id="display" columns="2" cellpadding="4">  
+  
+            <f:facet name="header">  
+                <p:graphicImage value="/images/cars/#{dataTableX.selectedCar.manufacturer}.jpg"/>  
+            </f:facet>  
+  
+            <h:outputText value="Model:" />  
+            <h:outputText value="#{dataTableX.selectedCar.model}" />  
+  
+            <h:outputText value="Year:" />  
+            <h:outputText value="#{dataTableX.selectedCar.year}" />  
+  
+            <h:outputText value="Manufacturer:" />  
+            <h:outputText value="#{dataTableX.selectedCar.manufacturer}" />  
+  
+            <h:outputText value="Color:" />  
+            <h:outputText value="#{dataTableX.selectedCar.color}" />  
+        </h:panelGrid>  
+    </p:dialog>  
+  
+</h:form>  
+      
+      
+      
+</html>
