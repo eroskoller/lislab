@@ -1,10 +1,7 @@
 
-import br.com.hibernate.entities.LabDetalheRequisicao;
-import br.com.hibernate.entities.LabRequisicao;
-import br.com.hibernate.entities.LabUsuario;
+import br.com.hibernate.entities.LabSetor;
 import br.com.hibernate.utils.OracleHelper;
 import java.io.File;
-import java.util.List;
 
 /*
  * To change this template, choose Tools | Templates
@@ -30,6 +27,8 @@ public class TestRel {
         
 //        float f = 1.2f;
 //        System.out.println(Math.ceil(f));
+        
+                LabSetor obj = (LabSetor) OracleHelper.getObjectByKey(LabSetor.class, "setStCodigo", "test");
         
         File file = new File("some file that dind't exists");
         System.out.println(file.exists());

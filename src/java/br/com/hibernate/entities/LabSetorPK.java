@@ -18,19 +18,24 @@ import javax.persistence.ManyToOne;
 @Embeddable
 public class LabSetorPK implements Serializable {
 
-    @ManyToOne
-    @JoinColumn(name="UNI_ST_CODIGO")
-    private LabUnidade uniStCodigo;
+    
+//    @ManyToOne
+//    @JoinColumn(name="UNI_ST_CODIGO")
+    @Column(name="UNI_ST_CODIGO")
+    private String uniStCodigo;
+    
     @Column(name="SET_ST_CODIGO")
     private String setStCodigo;
 
     public LabSetorPK() {
     }
 
-    public LabSetorPK(LabUnidade uniStCodigo, String setStCodigo) {
+    public LabSetorPK(String uniStCodigo, String setStCodigo) {
         this.uniStCodigo = uniStCodigo;
         this.setStCodigo = setStCodigo;
     }
+
+  
 
     
 
@@ -44,13 +49,15 @@ public class LabSetorPK implements Serializable {
         this.setStCodigo = setStCodigo;
     }
 
-    public LabUnidade getUniStCodigo() {
+    public String getUniStCodigo() {
         return uniStCodigo;
     }
 
-    public void setUniStCodigo(LabUnidade uniStCodigo) {
+    public void setUniStCodigo(String uniStCodigo) {
         this.uniStCodigo = uniStCodigo;
     }
+
+ 
 
     @Override
     public boolean equals(Object obj) {

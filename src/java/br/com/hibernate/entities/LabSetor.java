@@ -24,9 +24,10 @@ import javax.persistence.Table;
 public class LabSetor implements Serializable{
 
     @Id
-    @ManyToOne
-    @JoinColumn(name="UNI_ST_CODIGO")
-    private LabUnidade uniStCodigo;
+//    @ManyToOne
+//    @JoinColumn(name="UNI_ST_CODIGO")
+    @Column(name="UNI_ST_CODIGO")
+    private String uniStCodigo;
     @Id
     @Column(name="SET_ST_CODIGO")
     private String setStCodigo;
@@ -80,13 +81,15 @@ public class LabSetor implements Serializable{
         this.setStDescricao = setStDescricao;
     }
 
-    public LabUnidade getUniStCodigo() {
+    public String getUniStCodigo() {
         return uniStCodigo;
     }
 
-    public void setUniStCodigo(LabUnidade uniStCodigo) {
+    public void setUniStCodigo(String uniStCodigo) {
         this.uniStCodigo = uniStCodigo;
     }
+
+    
 
 
 

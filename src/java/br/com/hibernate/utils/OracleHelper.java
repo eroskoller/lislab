@@ -199,7 +199,7 @@ public class OracleHelper{
             Criteria criteria = session.createCriteria(classBean);
 
             if(strKey != null){
-                criteria.add(Restrictions.like(strKey, value));
+                criteria.add(Restrictions.eq(strKey, value));
             }
             result = criteria.list();
             tx.commit();

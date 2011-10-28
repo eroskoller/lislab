@@ -41,6 +41,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -180,6 +181,76 @@ public class PdfRelMakerPendencias {
         }
         
         
+        
+        private static List<LabRequisicao> grabListLabRequisicaosWithReqFilterAndLabDetFilterDetFirst
+                (Date dtInicio,Date dtFinal,Map<String,Object> mapAnds4Req,String field4OrsReq,List<Object> listOrs4Req,
+            Map<String,Object> mapAnds4Det,String field4OrsDet,List<Object> listOrs4Det){
+            Map<String,List<LabDetalheRequisicao>> mapInner ;
+            List<LabRequisicao> listLabRequisicaos;
+            long comeco = new Date().getTime();
+            
+            
+             List<LabDetalheRequisicao> listDr = OracleHelper.getListObjectsByAnds_Ors_Dates(LabDetalheRequisicao.class, mapAnds4Det, field4OrsDet, listOrs4Det,"reqDtCadastro", dtInicio, dtFinal); 
+             long fim = new Date().getTime();
+//            System.out.println("Tempo gasto p lista de LabRequisicoes: "+(new Long((fim-comeco)/1000)));
+             
+             System.out.println("Tempo gasto p lista de LabDetalheRequisicoes: "+(new Long((fim-comeco)/1000)));
+             
+             if(listDr != null && !listDr.isEmpty()){
+                 
+                 mapInner = new HashMap<String, List<LabDetalheRequisicao>>(listDr.size());
+                 List<LabDetalheRequisicao>  listInInner ;
+                  comeco = new Date().getTime();
+                 for(LabDetalheRequisicao ldr : listDr){
+                     
+                     if(mapInner.get(ldr.getRegStCodigo()) != null){
+                         
+                        mapInner.get(ldr.getRegStCodigo()).add(ldr);
+                        
+                     }else{
+                         
+                         listInInner = new ArrayList<LabDetalheRequisicao>();
+                         listInInner.add(ldr);
+                         mapInner.put(ldr.getReqStCodigo(), listInInner);
+                         
+                     }
+                 }
+                  fim = new Date().getTime();
+                 if(mapInner != null && !mapInner.isEmpty()){
+                     System.out.println("Tempo gasto p montar map "+(new Long((fim-comeco)/1000)));
+                     listLabRequisicaos = new ArrayList<LabRequisicao>();
+                     
+                     Iterator iter = mapInner.entrySet().iterator();
+                     comeco = new Date().getTime();
+                    while(iter.hasNext()){
+                        Map.Entry<String,Object> pair =  (Map.Entry<String,Object>) iter.next();
+                        LabRequisicao lr = (LabRequisicao)OracleHelper.getObjectByKey(LabRequisicao.class, "reqStCodigo",pair.getKey());
+                        List<LabDetalheRequisicao> list = (List<LabDetalheRequisicao>) pair.getValue();
+                        
+                        if(list != null && !list.isEmpty()){
+                            
+                            if(lr != null){
+                               lr.setListLabDetalheRequisicaoFiltrado(list); 
+                               listLabRequisicaos.add(lr);
+                            }
+                        }
+                        
+                    }
+                    fim = new Date().getTime();
+                    System.out.println("Tempo gasto p montar lista LabRequisicao "+(new Long((fim-comeco)/1000)));
+                     return  listLabRequisicaos;
+                 }
+                 
+             }
+            
+            
+            return null;
+        }
+        
+        
+        
+        
+        
         public static synchronized  Document geraPdfPendencias(String pdfName,Date dtInicio,Date dtFinal,Map<String,Object> mapAnds4Req,String field4OrsReq,List<Object> listOrs4Req,
                 Map<String,Object> mapAnds4Det,String field4OrsDet,List<Object> listOrs4Det){
             
@@ -189,7 +260,7 @@ public class PdfRelMakerPendencias {
                         try {
                             LabUnidade labUnidade;
                             String unidadeDesc = "NI";
-                            List<LabRequisicao> listReq = grabListLabRequisicaosWithReqFilterAndLabDetFilter(dtInicio, dtFinal, mapAnds4Req, field4OrsReq, listOrs4Req, mapAnds4Det, field4OrsDet, listOrs4Det);
+                            List<LabRequisicao> listReq = grabListLabRequisicaosWithReqFilterAndLabDetFilterDetFirst(dtInicio, dtFinal, mapAnds4Req, field4OrsReq, listOrs4Req, mapAnds4Det, field4OrsDet, listOrs4Det);
                             
                             if(mapAnds4Req.get("uniStCodigo") != null){
                                 labUnidade = (LabUnidade)OracleHelper.getObject(LabUnidade.class, mapAnds4Req.get("uniStCodigo"));
@@ -233,8 +304,8 @@ public class PdfRelMakerPendencias {
 //                                System.out.println(PageSize.A4.getHeight()); 
                     
                                     Calendar dtInicio = Calendar.getInstance();
-                                    dtInicio.add(Calendar.DAY_OF_YEAR, -30);
-//                                    dtInicio.add(Calendar.HOUR_OF_DAY, -1);
+                                    dtInicio.add(Calendar.DAY_OF_YEAR, -10);
+//                                    dtInicio.add(Calendar.HOUR_OF_DAY, -10);
                                     Calendar dtFinal = Calendar.getInstance();
                                     String uniStCodigo = "SPS";
                                     String derStUnidadeEx = "ACL";

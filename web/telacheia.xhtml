@@ -13,6 +13,9 @@
     
     <h:head>  
         
+        
+         <link rel='stylesheet' type='text/css' href='css/syntaxhighlighter/syntaxhighlighter.css' />
+        
     </h:head>  
     
 <!--    kdkdkdkdkkdkdk-->
@@ -20,22 +23,22 @@
 
 
 
-    <h:body>   
+<h:body  >   
       
         <h:form>
             
-<!--corrigindo o fucking bug             -->
+
                                  <p:layout fullPage="true">  
       
-                                            <p:layoutUnit position="top" height="75" header="Top" resizable="true" closable="false" collapsible="true">  
-                                                <h:outputText value="North unit content." />  
-                                            </p:layoutUnit>  
+                                     <p:layoutUnit position="top" height="75"    header="Top" resizable="true" closable="false" collapsible="true"   collapsed="true"  collapseSize="13" >  
+                                                <h:outputText value=""     />  
+                                         </p:layoutUnit>  
 
-                                            <p:layoutUnit position="bottom" height="75" header="Bottom" resizable="true" closable="false" collapsible="true">  
+                                     <p:layoutUnit   position="bottom" height="75" header="Bottom" resizable="true" closable="false" collapsible="true"  collapsed="true"  collapseSize="13" >  
                                                 <h:outputText value="South unit content." />  
-                                            </p:layoutUnit>  
+                                      </p:layoutUnit>  
 
-                                            <p:layoutUnit position="left" width="200" header="Left" resizable="true" closable="false" collapsible="true">  
+                                     <p:layoutUnit  style="font-size: 3px;"  position="left" width="180" header="Left" resizable="true" closable="false" collapsible="true">  
                                                 <h:outputText value="West unit content." />  
                                             </p:layoutUnit>  
             <!--
@@ -44,7 +47,24 @@
                                             </p:layoutUnit>  -->
 
                                             <p:layoutUnit position="center">  
-                                                This fullPage layout consists of five different layoutUnits which are resizable and closable by default.  
+                                                
+                                                
+                                                <h:panelGrid columns="4">
+                                                    <h:outputLabel value="Opcoes"/>
+                                                    
+                                                    <h:selectOneMenu onchange="submit()" 
+                                                                     value="">
+                                                        <f:selectItems 
+                                                            value="#{relatorioBean.opcoestens}"/>
+                                                    </h:selectOneMenu>
+                                                    
+                                                    <p:calendar  value="#{relatorioBean.dtFinalQuery}" immediate="true" >
+                                                        
+                                                    </p:calendar>
+                                                    
+                                                    
+                                                </h:panelGrid>
+                                                
                                             </p:layoutUnit>  
 
                                 </p:layout>  
