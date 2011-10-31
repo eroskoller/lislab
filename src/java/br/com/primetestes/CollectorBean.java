@@ -181,6 +181,12 @@ public class CollectorBean {
     }
     
     public String reinit() {
+        if(books != null){
+            for(Book b : books){
+                System.out.println(b.getAuthor());
+            }
+        }
+        
 		book = new Book();
 //		book.setAuthor(author);
 //                    book.setTitle(title);

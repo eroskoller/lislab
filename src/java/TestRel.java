@@ -2,6 +2,8 @@
 import br.com.hibernate.entities.LabSetor;
 import br.com.hibernate.utils.OracleHelper;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /*
  * To change this template, choose Tools | Templates
@@ -32,6 +34,8 @@ public class TestRel {
         
         File file = new File("some file that dind't exists");
         System.out.println(file.exists());
+        
+        
     }
     
 }

@@ -15,6 +15,8 @@
         
         
          <link rel='stylesheet' type='text/css' href='css/syntaxhighlighter/syntaxhighlighter.css' />
+         <link rel='stylesheet' type='text/css' href='css/body_layout.css' />
+          <link rel='stylesheet' type='text/css' href='css/overriding.css' />
         
     </h:head>  
     
@@ -25,7 +27,7 @@
 
 <h:body  >   
       
-        <h:form>
+    <h:form  id="formljcfhgcfh" > 
             
 
                                  <p:layout fullPage="true">  
@@ -38,7 +40,7 @@
                                                 <h:outputText value="South unit content." />  
                                       </p:layoutUnit>  
 
-                                     <p:layoutUnit  style="font-size: 3px;"  position="left" width="180" header="Left" resizable="true" closable="false" collapsible="true">  
+                                     <p:layoutUnit  style="font-size: 3px;"  position="left" width="180" header="Left" resizable="true" closable="false"  collapsed="true" collapsible="true">  
                                                 <h:outputText value="West unit content." />  
                                             </p:layoutUnit>  
             <!--
@@ -46,24 +48,97 @@
                                                 <h:outputText value="East unit content." />  
                                             </p:layoutUnit>  -->
 
-                                            <p:layoutUnit position="center">  
+                <p:layoutUnit position="center"   >  
                                                 
+                    <h:panelGrid columns="2"  style="width: 100%;" >
                                                 
-                                                <h:panelGrid columns="4">
-                                                    <h:outputLabel value="Opcoes"/>
+                                                    <h:panelGroup > 
                                                     
-                                                    <h:selectOneMenu onchange="submit()" 
-                                                                     value="">
-                                                        <f:selectItems 
-                                                            value="#{relatorioBean.opcoestens}"/>
-                                                    </h:selectOneMenu>
+                                                            <h:panelGrid columns="9">
+                                                                <h:outputLabel  style="font-weight: bold;" value="Opcoes"/>
+
+                                                                <h:selectOneMenu onchange="submit()" 
+                                                                                 value="">
+                                                                    <f:selectItems 
+                                                                        value="#{relatorioBean.opcoestens}"/>
+                                                                </h:selectOneMenu>
+
+
+                                                                <h:outputLabel   style="font-weight: bold;" value="Unidade de Ex: "/>
+                                                                <p:inputText value="#{relatorioBean.strUniStCodigoExcucao}" style="width: 40px;" />
+                                                                <p:inputText value="#{relatorioBean.labUnidadeExcucao.uniStDescricao}" style="width: 200px;"  readonly="true" />
+
+                                                                <h:outputLabel   style="font-weight: bold;" value="DT. Inicio: "/>
+                                                                <p:calendar  style="width: 140px;" value="#{relatorioBean.dtInicioQuery}" pattern="dd/MM/yyyy"  effect="explode" />  
+
+                                                                <h:outputLabel   style="font-weight: bold;" value="DT. Fim: "/>
+                                                                <p:calendar value="#{relatorioBean.dtFinalQuery}" pattern="dd/MM/yyyy"   effect="explode" />  
+
+
+                                                            </h:panelGrid>
+                                                
+                                                <h:panelGrid columns="3"  style="width: 100%;">
                                                     
-                                                    <p:calendar  value="#{relatorioBean.dtFinalQuery}" immediate="true" >
-                                                        
-                                                    </p:calendar>
+                                                    <h:outputLabel   style="font-weight: bold;" value="Unidade: "/>
+                                                    <p:inputText value="#{relatorioBean.strUniStCodigoCadastro}" style="width: 40px;" />
+                                                    <h:panelGroup   style="min-width: 700px; max-width: 900px;" >
+                                                                    
+                                                                            <p:breadCrumb preview="true" expandEffectDuration="160"
+                                                                                      collapseEffectDuration="100"
+                                                                                      initialCollapseEffectDuration="200"
+                                                                                      previewWidth="24" 
+                                                                                      style="min-width: 700px; max-width: 900px;"
+                                                                                      >  
+
+                                                                            <p:menuitem value="Categories" url="#" />  
+                                                                            <p:menuitem value="Sports" url="#" />  
+                                                                            <p:menuitem value="Football" url="#" />  
+                                                                            <p:menuitem value="Countriewws" url="#" />  
+                                                                            <p:menuitem value="Spain" url="#" />  
+                                                                            
+                                                                            <p:menuitem value="Teste" url="#"   />
+                                                                            
+                                                                            <p:menuitem value="F.C. Barcelona" url="#" />  
+                                                                            <p:menuitem value="Squad" url="#" />  
+                                                                            <p:menuitem value="Lionel Messi" url="#" />  
+                                                                            <p:menuitem value="Categories" url="#" />  
+                                                                            <p:menuitem value="Sports" url="#" />  
+                                                                            <p:menuitem value="Football" url="#" />  
+                                                                            <p:menuitem value="Countries" url="#" />  
+                                                                            <p:menuitem value="Spain" url="#" />  
+                                                                            <p:menuitem value="F.C. Barcelona" url="#" />  
+                                                                            <p:menuitem value="Squad" url="#" />  
+                                                                            <p:menuitem value="Lionel Messi" url="#" />  
+                                                                            <p:menuitem value="Categories" url="#" />  
+                                                                            <p:menuitem value="Sports" url="#" />  
+                                                                            <p:menuitem value="Football" url="#" />  
+                                                                            <p:menuitem value="Countries" url="#" />  
+                                                                            <p:menuitem value="Spain" url="#" />  
+                                                                            <p:menuitem value="F.C. Barcelona" url="#" />
+                                                                          
+
+                                                                        </p:breadCrumb>  
+                                                        </h:panelGroup>
+                                                    
+                                                      
+
                                                     
                                                     
                                                 </h:panelGrid>
+                                                
+                                                </h:panelGroup>
+                                                    
+                                                    
+                                                    
+                                                    <h:panelGroup  >
+                                                        <p:panel header="Estatus" style="text-align:center; height: 160px;" styleClass="docViewNavigation"    >
+                                                            
+                                                        </p:panel>
+                                                        
+                                                    </h:panelGroup>
+                                                    
+                                                    </h:panelGrid>
+                                                
                                                 
                                             </p:layoutUnit>  
 

@@ -17,7 +17,7 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns
     
  <context-param>   
   <param-name>primefaces.THEME</param-name>
-  <param-value>cupertino</param-value> 
+  <param-value>flick</param-value> 
 </context-param>
 
     
@@ -44,7 +44,7 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns
   </servlet-mapping>
   <session-config>
         <session-timeout>
-            30
+            1
         </session-timeout>
     </session-config>
     <welcome-file-list>

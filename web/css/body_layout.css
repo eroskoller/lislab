@@ -1,0 +1,109 @@
+/* 
+    Document   : body_layout
+    Created on : Oct 31, 2011, 11:55:46 AM
+    Author     : eros
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+root { 
+    display: block;
+}
+
+
+
+html, body, div, table, img, fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+
+
+body, pre, PRE {
+    font-family: Tahoma, Sans-Serif;
+    font-size: 11px;
+    color: #484848;
+    background-color: #ffffff;
+}
+
+/* for some reson IE things a form should have dimensions, */
+form {
+    padding: 0;
+    margin: 0;
+}
+
+table {
+    font-size: 11px;
+}
+
+ul {
+    margin-left: 10px;
+    padding: 0;
+}
+
+
+
+h2 {
+    font: 18px tahoma;
+    color: #646464;
+}
+
+.docViewContainer, .docViewNavigation, .docViewContent{
+    float:left;
+}
+.docViewNavigation, .docViewContent{
+    height: 200px;
+}
+.docViewNavigation{
+    width: 150px;
+    overflow: scroll;
+}
+.docViewContent{
+    width: 514px;
+    border: 1px solid #D9D9D9;
+}
+.docViewContainer{
+    width: 670px;
+}
+.docViewContainer a{
+    color: #444444;
+}
+
+
+
+/*
+.icePnlClpsblColpsdHdr div {
+    background: url("../images/PnlHdr_collapsed.gif") no-repeat scroll 3px 2px transparent;
+    margin: -2px 0 0 -2px;
+    padding: 5px 0 0 5px;
+}
+
+
+.icePnlClpsblHdr div {
+    background: url("../images/PnlHdr_down.gif") no-repeat scroll 3px 2px transparent;
+    margin: -2px 0 0 -2px;
+    padding: 5px 0 0 5px;
+}
+*/
+
+
+
+/*.icePnlTbOff .LftTop {
+    background: url("../css/rimeoverrider/Tab_LftTop_off.gif") no-repeat scroll left top transparent;
+    border: medium none;
+    height: 4px;
+    padding: 0;
+    text-align: center;
+    width: 4px;
+}*/
+
+
+
+
+
