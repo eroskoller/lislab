@@ -23,9 +23,10 @@ import javax.persistence.OneToOne;
 public class LabLocalPK implements Serializable{
 
 
-    @ManyToOne
-    @JoinColumn(name="UNI_ST_CODIGO")
-    private LabUnidade uniStCodigo;
+//    @ManyToOne
+//    @JoinColumn(name="UNI_ST_CODIGO")
+    @Column(name="UNI_ST_CODIGO")
+    private String uniStCodigo;
     
     @Column(name="LOC_ST_CODIGO",nullable=false, updatable=false, insertable=false)
     private String locStCodigo;
@@ -33,6 +34,13 @@ public class LabLocalPK implements Serializable{
     public LabLocalPK() {
     }
 
+    public LabLocalPK(String uniStCodigo, String locStCodigo) {
+        this.uniStCodigo = uniStCodigo;
+        this.locStCodigo = locStCodigo;
+    }
+
+    
+    
     public String getLocStCodigo() {
         return locStCodigo;
     }
@@ -41,20 +49,13 @@ public class LabLocalPK implements Serializable{
         this.locStCodigo = locStCodigo;
     }
 
-    public LabUnidade getUniStCodigo() {
+    public String getUniStCodigo() {
         return uniStCodigo;
     }
 
-    public void setUniStCodigo(LabUnidade uniStCodigo) {
+    public void setUniStCodigo(String uniStCodigo) {
         this.uniStCodigo = uniStCodigo;
     }
-
-  
-
-    
-
-  
-    
 
     @Override
     public boolean equals(Object obj) {
@@ -65,7 +66,7 @@ public class LabLocalPK implements Serializable{
             return false;
         }
         final LabLocalPK other = (LabLocalPK) obj;
-        if (this.uniStCodigo != other.uniStCodigo && (this.uniStCodigo == null || !this.uniStCodigo.equals(other.uniStCodigo))) {
+        if ((this.uniStCodigo == null) ? (other.uniStCodigo != null) : !this.uniStCodigo.equals(other.uniStCodigo)) {
             return false;
         }
         if ((this.locStCodigo == null) ? (other.locStCodigo != null) : !this.locStCodigo.equals(other.locStCodigo)) {
@@ -76,11 +77,16 @@ public class LabLocalPK implements Serializable{
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 43 * hash + (this.uniStCodigo != null ? this.uniStCodigo.hashCode() : 0);
-        hash = 43 * hash + (this.locStCodigo != null ? this.locStCodigo.hashCode() : 0);
+        int hash = 7;
+        hash = 31 * hash + (this.uniStCodigo != null ? this.uniStCodigo.hashCode() : 0);
+        hash = 31 * hash + (this.locStCodigo != null ? this.locStCodigo.hashCode() : 0);
         return hash;
     }
+
+
+  
+
+    
 
 
     

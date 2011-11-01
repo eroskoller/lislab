@@ -30,7 +30,7 @@ import org.primefaces.component.inputtext.InputText;
 
 @SessionScoped
 @ManagedBean(name="collectorBean")
-public class CollectorBean {
+public class CollectorBean implements Serializable{
     
     
 //    private String author;

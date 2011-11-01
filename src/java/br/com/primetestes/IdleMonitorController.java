@@ -13,7 +13,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;  
   
-import org.primefaces.event.IdleEvent;  
+//import org.primefaces.event.IdleEvent;  
   
 
 
@@ -33,14 +33,16 @@ public class IdleMonitorController {
     
     
     
-    public void idleListener(IdleEvent event) {  
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,   
-                                        "Your session is closed", "You have been idle for at least 5 seconds"));  
-        x ++;
-          activeListener();
-        //invalidate session  
-    }  
+//    public void idleListener(IdleEvent event) {  
+//        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,   
+//                                        "Your session is closed", "You have been idle for at least 5 seconds"));  
+//        x ++;
+//          activeListener();
+//        //invalidate session  
+//    }  
     
+    
+    //TODO UNCOMMENT
     
     
     public void idleListener() {

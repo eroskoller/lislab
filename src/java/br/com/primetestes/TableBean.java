@@ -413,7 +413,8 @@ public class TableBean implements Serializable {
     }
 
     public void onCarDrop(DragDropEvent ddEvent) {
-        Car car = ((Car) ddEvent.getData());
+        Car car = ((Car) ddEvent.getData());  
+//        TODO fix after breadcrumb workaround
 
         droppedCars.add(car);
         carsSmall.remove(car);

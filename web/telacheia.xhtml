@@ -2,13 +2,9 @@
     xmlns:h="http://java.sun.com/jsf/html"  
     xmlns:p="http://primefaces.prime.com.tr/ui"
     xmlns:c="http://java.sun.com/jsp/jstl/core"  
-    xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:f="http://java.sun.com/jsf/core">  
+    xmlns:f="http://java.sun.com/jsf/core"
+        >  
   
-    
-    
-    
-    
     
     
     <h:head>  
@@ -20,15 +16,14 @@
         
     </h:head>  
     
-<!--    kdkdkdkdkkdkdk-->
-<!--qualeur coisa      -->
 
 
-
+    
 <h:body  >   
       
-    <h:form  id="formljcfhgcfh" > 
-            
+    
+        
+                        <p:growl id="msgs" />
 
                                  <p:layout fullPage="true">  
       
@@ -40,32 +35,36 @@
                                                 <h:outputText value="South unit content." />  
                                       </p:layoutUnit>  
 
-                                     <p:layoutUnit  style="font-size: 3px;"  position="left" width="180" header="Left" resizable="true" closable="false"  collapsed="true" collapsible="true">  
-                                                <h:outputText value="West unit content." />  
-                                            </p:layoutUnit>  
+                                     <p:layoutUnit    position="left" width="180" header="Menu" resizable="true" closable="false"  collapsed="true" collapsible="true">  
+                                                
+                                     </p:layoutUnit>  
             <!--
                                             <p:layoutUnit position="right" width="200" header="Right" resizable="true" closable="false" collapsible="true">  
                                                 <h:outputText value="East unit content." />  
                                             </p:layoutUnit>  -->
 
                 <p:layoutUnit position="center"   >  
-                                                
-                    <h:panelGrid columns="2"  style="width: 100%;" >
+                      <h:form  id="center" > 
+                          
+                          
+                          
+                    <h:panelGrid columns="1"  style="width: 100%;" >
                                                 
                                                     <h:panelGroup > 
                                                     
-                                                            <h:panelGrid columns="9">
+                                                            <h:panelGrid columns="10">
                                                                 <h:outputLabel  style="font-weight: bold;" value="Opcoes"/>
 
-                                                                <h:selectOneMenu onchange="submit()" 
-                                                                                 value="">
+                                                                <h:selectOneMenu onchange="submit()" >
                                                                     <f:selectItems 
                                                                         value="#{relatorioBean.opcoestens}"/>
                                                                 </h:selectOneMenu>
 
 
                                                                 <h:outputLabel   style="font-weight: bold;" value="Unidade de Ex: "/>
-                                                                <p:inputText value="#{relatorioBean.strUniStCodigoExcucao}" style="width: 40px;" />
+                                                                <p:inputText value="#{relatorioBean.strUniStCodigoExcucao}" style="width: 40px;"    />
+                                                                
+                                                                <p:commandButton   update="panel,display" actionListener="#{relatorioBean.grabUnidadeExcucao}"  image="images/lupa_47x44.png"/>
                                                                 <p:inputText value="#{relatorioBean.labUnidadeExcucao.uniStDescricao}" style="width: 200px;"  readonly="true" />
 
                                                                 <h:outputLabel   style="font-weight: bold;" value="DT. Inicio: "/>
@@ -81,13 +80,13 @@
                                                     
                                                     <h:outputLabel   style="font-weight: bold;" value="Unidade: "/>
                                                     <p:inputText value="#{relatorioBean.strUniStCodigoCadastro}" style="width: 40px;" />
-                                                    <h:panelGroup   style="min-width: 700px; max-width: 900px;" >
+                                                    <h:panelGroup    >
                                                                     
                                                                             <p:breadCrumb preview="true" expandEffectDuration="160"
                                                                                       collapseEffectDuration="100"
                                                                                       initialCollapseEffectDuration="200"
                                                                                       previewWidth="24" 
-                                                                                      style="min-width: 700px; max-width: 900px;"
+                                                                              
                                                                                       >  
 
                                                                             <p:menuitem value="Categories" url="#" />  
@@ -120,7 +119,166 @@
                                                                         </p:breadCrumb>  
                                                         </h:panelGroup>
                                                     
+                                                      <h:outputLabel   style="font-weight: bold;" value="Postos: "/>
+                                                      <p:inputText value="#{relatorioBean.strOriStCodigo}" style="width: 40px;" />
+                                                    
+                                                                            <p:breadCrumb preview="true" expandEffectDuration="160"
+                                                                                      collapseEffectDuration="200"
+                                                                                      initialCollapseEffectDuration="100"
+                                                                                      previewWidth="24" 
+                                                                                      >  
+
+                                                                            <p:menuitem value="Categories" url="#" />  
+                                                                            <p:menuitem value="Sports" url="#" />  
+                                                                            <p:menuitem value="Football" url="#" />  
+                                                                            <p:menuitem value="Countries" url="#" />  
+                                                                            <p:menuitem value="Spain" url="#" />  
+                                                                            <p:menuitem value="F.C. Barcelona" url="#" />  
+                                                                            <p:menuitem value="Squad" url="#" />  
+                                                                            <p:menuitem value="Lionel Messi" url="#" />  
+                                                                            <p:menuitem value="Categories" url="#" />  
+                                                                            <p:menuitem value="Sports" url="#" />  
+                                                                            <p:menuitem value="Football" url="#" />  
+                                                                            <p:menuitem value="Countries" url="#" />  
+                                                                            <p:menuitem value="Spain" url="#" />  
+                                                                            <p:menuitem value="F.C. Barcelona" url="#" />  
+                                                                            <p:menuitem value="Squad" url="#" />  
+                                                                            <p:menuitem value="Lionel Messi" url="#" />  
+                                                                            <p:menuitem value="Categories" url="#" />  
+                                                                            <p:menuitem value="Sports" url="#" />  
+                                                                            <p:menuitem value="Football" url="#" />  
+                                                                            <p:menuitem value="Countries" url="#" />  
+                                                                            <p:menuitem value="Spain" url="#" />  
+                                                                            <p:menuitem value="F.C. Barcelona" url="#" />  
+                                                                            <p:menuitem value="Squad" url="#" />  
+                                                                         
+
+                                                                        </p:breadCrumb>  
+                                                    
+                                                   
+                                                    
+                                                    
+                                                      <h:outputLabel   style="font-weight: bold;" value="Local: "/>
+                                                      <p:inputText value="#{relatorioBean.strLocStCodigo}" style="width: 40px;" />
+                                                    
+                                                                            <p:breadCrumb preview="true" expandEffectDuration="160"
+                                                                                      collapseEffectDuration="200"
+                                                                                      initialCollapseEffectDuration="100"
+                                                                                      previewWidth="24" 
+                                                                                      >  
+
+                                                                            <p:menuitem value="Categories" url="#" />  
+                                                                            <p:menuitem value="Sports" url="#" />  
+                                                                            <p:menuitem value="Football" url="#" />  
+                                                                            <p:menuitem value="Countries" url="#" />  
+                                                                            <p:menuitem value="Spain" url="#" />  
+                                                                            <p:menuitem value="F.C. Barcelona" url="#" />  
+                                                                            <p:menuitem value="Squad" url="#" />  
+                                                                            <p:menuitem value="Lionel Messi" url="#" />  
+                                                                            <p:menuitem value="Categories" url="#" />  
+                                                                            <p:menuitem value="Sports" url="#" />  
+                                                                            <p:menuitem value="Football" url="#" />  
+                                                                            <p:menuitem value="Countries" url="#" />  
+                                                                            <p:menuitem value="Spain" url="#" />  
+                                                                            <p:menuitem value="F.C. Barcelona" url="#" />  
+                                                                            <p:menuitem value="Squad" url="#" />  
+                                                                            <p:menuitem value="Lionel Messi" url="#" />  
+                                                                            <p:menuitem value="Categories" url="#" />  
+                                                                            <p:menuitem value="Sports" url="#" />  
+                                                                            <p:menuitem value="Football" url="#" />  
+                                                                            <p:menuitem value="Countries" url="#" />  
+                                                                            <p:menuitem value="Spain" url="#" />  
+                                                                            <p:menuitem value="F.C. Barcelona" url="#" />  
+                                                                            <p:menuitem value="Squad" url="#" />  
+                                                                            <p:menuitem value="Lionel Messi" url="#" />  
+                                                                            <p:menuitem value="Categories" url="#" />  
+                                                                            <p:menuitem value="Sports" url="#" />  
+                                                                            <p:menuitem value="Football" url="#" />  
+                                                                            
+
+                                                                        </p:breadCrumb>  
                                                       
+                                                      
+                                                      
+                                                      <h:outputLabel   style="font-weight: bold;" value="Setor: "/>
+                                                      <p:inputText value="#{relatorioBean.strSetStCodigo}" style="width: 40px;" />
+                                                    
+                                                                            <p:breadCrumb preview="true" expandEffectDuration="160"
+                                                                                      collapseEffectDuration="200"
+                                                                                      initialCollapseEffectDuration="100"
+                                                                                      previewWidth="24" 
+                                                                                      >  
+
+                                                                            <p:menuitem value="Categories" url="#" />  
+                                                                            <p:menuitem value="Sports" url="#" />  
+                                                                            <p:menuitem value="Football" url="#" />  
+                                                                            <p:menuitem value="Countries" url="#" />  
+                                                                            <p:menuitem value="Spain" url="#" />  
+                                                                            <p:menuitem value="F.C. Barcelona" url="#" />  
+                                                                            <p:menuitem value="Squad" url="#" />  
+                                                                            <p:menuitem value="Lionel Messi" url="#" />  
+                                                                            <p:menuitem value="Categories" url="#" />  
+                                                                            <p:menuitem value="Sports" url="#" />  
+                                                                            <p:menuitem value="Football" url="#" />  
+                                                                            <p:menuitem value="Countries" url="#" />  
+                                                                            <p:menuitem value="Spain" url="#" />  
+                                                                            <p:menuitem value="F.C. Barcelona" url="#" />  
+                                                                            <p:menuitem value="Squad" url="#" />  
+                                                                            <p:menuitem value="Lionel Messi" url="#" />  
+                                                                            <p:menuitem value="Categories" url="#" />  
+                                                                            <p:menuitem value="Sports" url="#" />  
+                                                                            <p:menuitem value="Football" url="#" />  
+                                                                            <p:menuitem value="Countries" url="#" />  
+                                                                            <p:menuitem value="Spain" url="#" />  
+                                                                            <p:menuitem value="F.C. Barcelona" url="#" />  
+                                                                            <p:menuitem value="Squad" url="#" />  
+                                                                            <p:menuitem value="Lionel Messi" url="#" />  
+                                                                            <p:menuitem value="Categories" url="#" />  
+                                                                            <p:menuitem value="Sports" url="#" />  
+                                                                            
+                                                                        </p:breadCrumb>  
+                                                      
+                                                      
+                                                      
+                                                      <h:outputLabel   style="font-weight: bold;" value="Exame: "/>
+                                                      <p:inputText value="#{relatorioBean.strSetStCodigo}" style="width: 40px;" />
+                                                    
+                                                                            <p:breadCrumb preview="true" expandEffectDuration="160"
+                                                                                      collapseEffectDuration="200"
+                                                                                      initialCollapseEffectDuration="100"
+                                                                                      previewWidth="20"
+                                                                                      id="breadcrunbexames"
+                                                                                      >  
+
+                                                                            <p:menuitem value="Categories" url="#" />  
+                                                                            <p:menuitem value="Sports" url="#" />  
+                                                                            <p:menuitem value="Football" url="#" />  
+                                                                            <p:menuitem value="Countries" url="#" />  
+                                                                            <p:menuitem value="Spain" url="#" />  
+                                                                            <p:menuitem value="F.C. Barcelona" url="#" />  
+                                                                            <p:menuitem value="Squad" url="#" />  
+                                                                            <p:menuitem value="Lionel Messi" url="#" />  
+                                                                            <p:menuitem value="Categories" url="#" />  
+                                                                            <p:menuitem value="Sports" url="#" />  
+                                                                            <p:menuitem value="Football" url="#" />  
+                                                                            <p:menuitem value="Countries" url="#" />  
+                                                                            <p:menuitem value="Spain" url="#" />  
+                                                                            <p:menuitem value="F.C. Barcelona" url="#" />  
+                                                                            <p:menuitem value="Squad" url="#" />  
+                                                                            <p:menuitem value="Lionel Messi" url="#" />  
+                                                                            <p:menuitem value="Categories" url="#" />  
+                                                                            <p:menuitem value="Sports" url="#" />  
+                                                                            <p:menuitem value="Football" url="#" />  
+                                                                            <p:menuitem value="Countries" url="#" />  
+                                                                            <p:menuitem value="Spain" url="#" />  
+                                                                            <p:menuitem value="F.C. Barcelona" url="#" />  
+                                                                            <p:menuitem value="Squad" url="#" />  
+                                                                            <p:menuitem value="Lionel Messi" url="#" />  
+                                                                            <p:menuitem value="Categories" url="#" />  
+                                                                            <p:menuitem value="Sports" url="#" />  
+                                                                            
+
+                                                                            </p:breadCrumb>
 
                                                     
                                                     
@@ -128,31 +286,177 @@
                                                 
                                                 </h:panelGroup>
                                                     
+                                                            <h:panelGrid columns="3">
+                                                                
+                                                                         <p:panel header="Estatus" style="text-align:center;   width: 400px; height: 100px;" styleClass="docViewNavigation"    >
+                                                                             
+                                                                             <h:panelGrid columns="2">
+                                                                        
+                                                                                <h:outputLabel value="001 - CADASTRO"/>
+                                                                                <h:selectBooleanCheckbox value="#{relatorioBean.blCadastro}"/>
+                                                                                
+                                                                                <h:outputLabel value="002 - CONF-CAD"/>
+                                                                                <h:selectBooleanCheckbox value="#{relatorioBean.blConfCad}"/>
+                                                                                
+                                                                                <h:outputLabel value="003 - PRE-TRIADO"/>
+                                                                                <h:selectBooleanCheckbox value="#{relatorioBean.blPreTriado}"/>
+                                                                                
+                                                                                <h:outputLabel value="004 - TRIAGEM"/>
+                                                                                <h:selectBooleanCheckbox value="#{relatorioBean.blTriagem}"/>
+                                                                                
+                                                                                <h:outputLabel value="005 - TRIADO-AP"/>
+                                                                                <h:selectBooleanCheckbox value="#{relatorioBean.blTrIadoAP}"/>
+                                                                                
+                                                                                <h:outputLabel value="006 - REC-SETOR"/>
+                                                                                <h:selectBooleanCheckbox value="#{relatorioBean.blRecSetor}"/>
+                                                                                
+                                                                                <h:outputLabel value="007 - PENDENTE "/>
+                                                                                <h:selectBooleanCheckbox value="#{relatorioBean.blPendente}"/>
+                                                                                
+                                                                                <h:outputLabel value="008 - COMPLETO "/>
+                                                                                <h:selectBooleanCheckbox value="#{relatorioBean.blCompleto}"/>
+                                                                                
+                                                                                <h:outputLabel value="009 - INGRESSO"/>
+                                                                                <h:selectBooleanCheckbox value="#{relatorioBean.blIngresso}"/>
+                                                                                
+                                                                                <h:outputLabel value="010 - LIB  TEC"/>
+                                                                                <h:selectBooleanCheckbox value="#{relatorioBean.blLibTec}"/>
+                                                                                
+                                                                                <h:outputLabel value="011 - ASSINADO"/>
+                                                                                <h:selectBooleanCheckbox value="#{relatorioBean.blAssinado}"/>
+                                                                                
+                                                                                <h:outputLabel value="012 - CONFIRMA"/>
+                                                                                <h:selectBooleanCheckbox value="#{relatorioBean.blConfirma}"/>
+                                                                                
+                                                                                <h:outputLabel value="013 - CANCELADO"/>
+                                                                                <h:selectBooleanCheckbox value="#{relatorioBean.blCancelado}"/>
+                                                                                
+                                                                                <h:outputLabel value="014 - ARMAZENADO"/>
+                                                                                <h:selectBooleanCheckbox value="#{relatorioBean.blArmazenado}"/>
+                                                                                
+                                                                                <h:outputLabel value="015 - DESCARTADO"/>
+                                                                                <h:selectBooleanCheckbox value="#{relatorioBean.blDescartado}"/>
+                                                                                
+                                                                                <h:outputLabel value="016 - IMPRESSO"/>
+                                                                                <h:selectBooleanCheckbox value="#{relatorioBean.blImpresso}"/>
+                                                                                
+                                                                                <h:outputLabel value="017 - 2 AMOSTRA"/>
+                                                                                <h:selectBooleanCheckbox value="#{relatorioBean.bl2Amostra}"/>
+                                                                                
+                                                                                <h:outputLabel value="018 - LAUDADE"/>
+                                                                                <h:selectBooleanCheckbox value="#{relatorioBean.blLaudado}"/>
+                                                                                
+                                                                                <h:outputLabel value="020 - NAO COLETADO"/>
+                                                                                <h:selectBooleanCheckbox value="#{relatorioBean.blNaoColetado}"/>
+                                                                                
+                                                                                <h:outputLabel value="040 - DELETADO"/>
+                                                                                <h:selectBooleanCheckbox value="#{relatorioBean.blDeletado}"/>
+                                                                                
+                                                                                <h:outputLabel value="041 - DEVE MATERIAL"/>
+                                                                                <h:selectBooleanCheckbox value="#{relatorioBean.blDevMat}"/>
+                                                                                
+                                                                                <h:outputLabel value="042 - REMARCADO"/>
+                                                                                <h:selectBooleanCheckbox value="#{relatorioBean.blRemarcado}"/>
+                                                                                
+                                                                                <h:outputLabel value="043 - PRE CONFERIDO"/>
+                                                                                <h:selectBooleanCheckbox value="#{relatorioBean.blPreConf}"/>
+                                                                                
+                                                                                </h:panelGrid>
+                                                                             
+
+                                                                        </p:panel>
+                                                                
+                                                                <h:panelGrid columns="2">
+
+                                                                    <h:panelGrid columns="2">
+                                                                        
+                                                                                <h:outputLabel value="Omitidos"/>
+                                                                                <h:selectBooleanCheckbox value="#{relatorioBean.blOmitidos}"/>
+
+                                                                                <h:outputLabel value="Parcial"/>
+                                                                                <h:selectBooleanCheckbox value="#{relatorioBean.blParcial}"/>
+
+                                                                                 <h:outputLabel value="NaoConfFat"/>
+                                                                                <h:selectBooleanCheckbox value="#{relatorioBean.blParcial}"/>
+                                                                        
+                                                                        
+                                                                    </h:panelGrid>
+                                                                    
+                                                                    <h:panelGrid columns="2">
+                                                                        
+                                                                                 <h:outputLabel value="Faturados"/>
+                                                                                <h:selectBooleanCheckbox value="#{relatorioBean.blFaturados}"/>
+
+                                                                                <h:outputLabel value="NaoConficad"/>
+                                                                                <h:selectBooleanCheckbox value="#{relatorioBean.blNaoConficad}"/>
+                                                                        
+                                                                    </h:panelGrid>
+                                                                                
+
+                                                                                
+
+                                                                </h:panelGrid>
+                                                                
+                                                                <h:panelGroup>
+                                                                    <p:commandButton value="Pesquisar"/>
+                                                                </h:panelGroup>
+
+                                                            </h:panelGrid>
                                                     
-                                                    
-                                                    <h:panelGroup  >
-                                                        <p:panel header="Estatus" style="text-align:center; height: 160px;" styleClass="docViewNavigation"    >
-                                                            
-                                                        </p:panel>
-                                                        
-                                                    </h:panelGroup>
+                                                   
+                        
+                        
+                                                            <p:dataTable var="doc" value="#{relatorioBean.listServicoDocs}">  
+                                                                    <p:column>  
+                                                                        <f:facet name="header">  
+                                                                                PDF  
+                                                                        </f:facet>  
+                                                                        <h:outputText value="#{doc.strNome}" />  
+                                                                    </p:column>  
+
+                                                                    <p:column>  
+                                                                        <f:facet name="header">  
+                                                                                Data Inicio Pesq.  
+                                                                        </f:facet>  
+                                                                        <h:outputText value="#{doc.dtInicio}" />  
+                                                                    </p:column>  
+
+
+                                                                    <p:column>  
+                                                                        <f:facet name="header">  
+                                                                                Estatus  
+                                                                        </f:facet>  
+                                                                        <h:outputText value="#{doc.intProgresso}" />   
+                                                                    </p:column>  
+                                                                
+                                                                <p:column>  
+                                                                        <f:facet name="header">  
+                                                                                Link  
+                                                                        </f:facet>  
+<!--                                                                    <p:progressBar 
+                                                                        widgetVar="pbAjax" ajax="true" value="#{doc.intProgresso}"  
+                                                                                onCompleteUpdate="growl" completeListener="#{doc.onComplete}"  
+                                                                                onCancelUpdate="growl" cancelListener="#{doc.onCancel}"  
+                                                                                oncomplete="startButton2.enable()"/> -->
+                                                                </p:column>  
+                                                                
+                                                                </p:dataTable>  
+
+                        
+                        
                                                     
                                                     </h:panelGrid>
                                                 
-                                                
+                                                </h:form>
                                             </p:layoutUnit>  
 
                                 </p:layout>  
 
             
-            
-        </h:form>
-        
-       
-        
         
         
     </h:body>
+     
   
     
 </html>

@@ -22,11 +22,17 @@ public class LabOrigemPK implements Serializable{
    
     @Column(name="ORI_ST_CODIGO",nullable=false, updatable=false, insertable=false)
     private String oriStCodigo;
-    @ManyToOne
-    @JoinColumn(name="UNI_ST_CODIGO")
-    private LabUnidade uniStCodigo;
+//    @ManyToOne
+//    @JoinColumn(name="UNI_ST_CODIGO")
+    @Column(name="UNI_ST_CODIGO")
+    private String uniStCodigo;
 
     public LabOrigemPK() {
+    }
+
+    public LabOrigemPK(String oriStCodigo, String uniStCodigo) {
+        this.oriStCodigo = oriStCodigo;
+        this.uniStCodigo = uniStCodigo;
     }
 
     
@@ -41,18 +47,15 @@ public class LabOrigemPK implements Serializable{
         this.oriStCodigo = oriStCodigo;
     }
 
-    public LabUnidade getUniStCodigo() {
+    public String getUniStCodigo() {
         return uniStCodigo;
     }
 
-    public void setUniStCodigo(LabUnidade uniStCodigo) {
+    public void setUniStCodigo(String uniStCodigo) {
         this.uniStCodigo = uniStCodigo;
     }
 
     
-    
-
-
 
 
     @Override

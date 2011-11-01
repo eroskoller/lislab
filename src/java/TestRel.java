@@ -30,10 +30,14 @@ public class TestRel {
 //        float f = 1.2f;
 //        System.out.println(Math.ceil(f));
         
-                LabSetor obj = (LabSetor) OracleHelper.getObjectByKey(LabSetor.class, "setStCodigo", "test");
+//                LabSetor obj = (LabSetor) OracleHelper.getObjectByKey(LabSetor.class, "setStCodigo", "test");
         
-        File file = new File("some file that dind't exists");
-        System.out.println(file.exists());
+//        File file = new File("some file that dind't exists");
+        
+        String s = "some file that dind't exists";
+        System.out.println(s.split("\\D"));
+        
+//        System.out.println(file.exists());
         
         
     }

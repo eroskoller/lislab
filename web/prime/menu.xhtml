@@ -1,0 +1,50 @@
+<html xmlns="http://www.w3.org/1999/xhtml"  
+    xmlns:h="http://java.sun.com/jsf/html"  
+    xmlns:p="http://primefaces.prime.com.tr/ui"
+    xmlns:f="http://java.sun.com/jsf/core"  xmlns:ui="http://java.sun.com/jsf/facelets">  
+  
+    <h:head>  
+    
+    
+        <script type="text/javascript">
+            
+            
+            function pointFocus(){
+                
+                document.getElementById("form:authorinput").focus();
+            }
+            
+        </script>
+    
+    </h:head>  
+      
+    <h:body>   
+      
+        <h:form  id="formmenu" >
+            
+       
+<!--    <h3>Dynamic Position</h3>  
+    <p:commandButton id="dynaButton" value="Show" type="button"/>  
+    <p:menu position="dynamic" trigger="dynaButton" my="left top" at="left bottom">  
+        <p:submenu label="Ajax Menuitems">  
+            <p:menuitem value="Save"  update="messages" icon="ui-icon ui-icon-disk"/>  
+            <p:menuitem value="Update"  update="messages" icon="ui-icon ui-icon-arrowrefresh-1-w"/>  
+        </p:submenu>  
+        <p:submenu label="Non-Ajax Menuitem">  
+            <p:menuitem value="Delete"  update="messages" ajax="false" icon="ui-icon ui-icon-close"/>  
+        </p:submenu>  
+        <p:submenu label="Navigations">  
+            <p:menuitem value="Home" url="http://www.primefaces.org" icon="ui-icon ui-icon-home"/>  
+            <p:menuitem value="TouchFaces"  icon="ui-icon ui-icon-star"/>  
+        </p:submenu>  
+    </p:menu>  
+            -->
+            
+            <ui:repeat value="#{breadCrumbs.items}" var="item">
+                <p:commandButton value="#{item.name}"  alt="holly fucking piece shit" />
+            </ui:repeat>
+            
+            
+        </h:form>
+    </h:body>
+</html>

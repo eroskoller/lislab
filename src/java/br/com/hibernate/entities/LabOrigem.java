@@ -38,9 +38,9 @@ public class LabOrigem implements Serializable{
     @Column(name="ORI_ST_CODIGO")
     private String oriStCodigo;
     @Id
-    @ManyToOne
-    @JoinColumn(name="UNI_ST_CODIGO")
-    private LabUnidade uniStCodigo;
+//    @ManyToOne
+    @Column(name="UNI_ST_CODIGO")
+    private String uniStCodigo;
 
 
 
@@ -113,6 +113,14 @@ public class LabOrigem implements Serializable{
 
 //    @OneToMany(mappedBy="oriStCodigo")
 //    private List<LabRequisicao> listLabRequisicao;
+
+    public LabOrigem() {
+    }
+
+    public LabOrigem(String oriStCodigo, String uniStCodigo) {
+        this.oriStCodigo = oriStCodigo;
+        this.uniStCodigo = uniStCodigo;
+    }
 
    
 
@@ -344,13 +352,15 @@ public class LabOrigem implements Serializable{
         this.oriStCodigo = oriStCodigo;
     }
 
-    public LabUnidade getUniStCodigo() {
+    public String getUniStCodigo() {
         return uniStCodigo;
     }
 
-    public void setUniStCodigo(LabUnidade uniStCodigo) {
+    public void setUniStCodigo(String uniStCodigo) {
         this.uniStCodigo = uniStCodigo;
     }
+
+    
 
     @Override
     public boolean equals(Object obj) {
