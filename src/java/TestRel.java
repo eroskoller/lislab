@@ -1,4 +1,5 @@
 
+import br.com.hibernate.entities.LabOrigem;
 import br.com.hibernate.entities.LabSetor;
 import br.com.hibernate.utils.OracleHelper;
 import java.io.File;
@@ -34,8 +35,11 @@ public class TestRel {
         
 //        File file = new File("some file that dind't exists");
         
-        String s = "some file that dind't exists";
-        System.out.println(s.split("\\D"));
+//        String s = "some file that dind't exists";
+//        System.out.println(s.split("\\D"));
+        
+        LabOrigem lo = OracleHelper.getLabOrigemByUniStCodigo("SPS", "000174");
+        System.out.println(lo.getOriStDescricao());
         
 //        System.out.println(file.exists());
         

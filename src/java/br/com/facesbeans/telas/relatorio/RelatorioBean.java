@@ -10,28 +10,24 @@ import br.com.hibernate.entities.LabLocalPK;
 import br.com.hibernate.entities.LabOrigem;
 import br.com.hibernate.entities.LabOrigemPK;
 import br.com.hibernate.entities.LabSetor;
+import br.com.hibernate.entities.LabSetorPK;
 import br.com.hibernate.entities.LabUnidade;
 import br.com.hibernate.utils.OracleHelper;
 import br.com.utils.tipstricks.ZerosFabrica;
-import com.sun.faces.facelets.tag.jstl.core.IndexedValueExpression;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import javax.el.ELContext;
-import javax.el.ELException;
-import javax.el.PropertyNotFoundException;
-import javax.el.PropertyNotWritableException;
-import javax.el.ValueExpression;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
 import org.primefaces.component.breadcrumb.BreadCrumb;
 import org.primefaces.component.menuitem.MenuItem;
-import org.primefaces.component.toolbar.ToolbarGroup;
+import org.primefaces.component.submenu.Submenu;
+import org.primefaces.model.DefaultMenuModel;
 import org.primefaces.model.MenuModel;
 //import org.primefaces.model.breadcrumb.BreadCrumb;
 
@@ -57,26 +53,29 @@ public class RelatorioBean implements Serializable{
         
     private String strOriStCodigo;
     private LabOrigem labOrigem;
-    private Set<LabOrigem> listLabOrigem;
-    private Set<LabOrigem> listLabOrigemSelected;
+    private List<LabOrigem> listLabOrigem;
+    private MenuModel menuLabOrigem = new org.primefaces.model.DefaultMenuModel();
     
     private String strLocStCodigo;
     private LabLocal labLocal;
-    private Set<LabLocal> listLabLocal;
-    private Set<LabLocal> listLabLocalSelected;
+    private List<LabLocal> listLabLocal;
+    private List<LabLocal> listLabLocalSelected;
+    private MenuModel menuLabLocal = new org.primefaces.model.DefaultMenuModel();
     
     
     private String strSetStCodigo;
     private LabSetor labSetor;
-    private Set<LabSetor> listLabSetor;
-    private Set<LabSetor> listLabSetorSelected;
+    private List<LabSetor> listLabSetor;
+    private List<LabSetor> listLabSetorSelected;
+    private MenuModel menuLabSetor = new org.primefaces.model.DefaultMenuModel();
     
     private String strExaStCodigo;
     private LabExame labExame;
-    private Set<LabExame> listLabExame;
-    private Set<LabExame> listLabExameSelected;
+    private List<LabExame> listLabExame;
+    private List<LabExame> listLabExameSelected;
+    private MenuModel menuLabExame = new org.primefaces.model.DefaultMenuModel();
     
-    private Set<ServicoDocumento>  listServicoDocs;
+    private List<ServicoDocumento>  listServicoDocs;
     
     
    private boolean blCadastro;
@@ -112,7 +111,8 @@ public class RelatorioBean implements Serializable{
    private boolean blFaturados;
    private boolean blNaoConficad;   
    
-   
+   BreadCrumb breadCrumb = new BreadCrumb();
+   public MenuModel model = new DefaultMenuModel();
    
    
    
@@ -125,7 +125,25 @@ public class RelatorioBean implements Serializable{
 //        
 
 //        breadCrumbModelUnidades.setItems(this);
+    
         
+        
+    }
+
+    public BreadCrumb getBreadCrumb() {
+        return breadCrumb;
+    }
+
+    public void setBreadCrumb(BreadCrumb breadCrumb) {
+        this.breadCrumb = breadCrumb;
+    }
+
+    public MenuModel getModel() {
+        return model;
+    }
+
+    public void setModel(MenuModel model) {
+        this.model = model;
     }
 
     
@@ -152,14 +170,32 @@ public class RelatorioBean implements Serializable{
                 && labUnidadeCadastro != null){
             
             labOrigem = null;
-            LabOrigemPK pk = new LabOrigemPK(strOriStCodigo, labUnidadeCadastro.getUniStCodigo());
-            labOrigem = (LabOrigem)OracleHelper.getObject(LabOrigem.class, pk);
+            LabOrigemPK pk = new LabOrigemPK(getStrOriStCodigo(), labUnidadeCadastro.getUniStCodigo());
+//            labOrigem = (LabOrigem)OracleHelper.getObject(LabOrigem.class, pk);
+            labOrigem  = OracleHelper.getLabOrigemByUniStCodigo(labUnidadeCadastro.getUniStCodigo(), strOriStCodigo);
             if(labOrigem != null){
-                if(listLabOrigem == null){listLabOrigem = new HashSet<LabOrigem>();}
-                listLabOrigem.add(labOrigem);
+                if(listLabOrigem == null){listLabOrigem = new ArrayList<LabOrigem>();}
+                        listLabOrigem.add(labOrigem);
+                        MenuItem mitem = new MenuItem();
+                        mitem.setValue(labOrigem.getOriStCodigo());
+//                        mitem.setId(labOrigem.getOriStCodigo()+"labOrigem");
+                        menuLabOrigem.addMenuItem(mitem);
+            }else{
+                System.out.println("LabOrigem was null.....");
             }
         }
     }
+//    public List<LabOrigem> getListOrigens(){
+//        if(listLabOrigem != null){
+//            List<LabOrigem> l = new ArrayList<LabOrigem>();
+//            for(LabOrigem lo : listLabOrigem){
+//                l.add(lo);
+//            }
+//            return  l;
+//        }
+//        
+//        return  null;
+//    }
     
     public void grabLocalCadastro(ActionEvent event){
         System.out.println("Indide grabLocalCadastro");
@@ -169,23 +205,31 @@ public class RelatorioBean implements Serializable{
             LabLocalPK pk = new LabLocalPK(labUnidadeCadastro.getUniStCodigo(), strLocStCodigo);
             labLocal = (LabLocal)OracleHelper.getObject(LabLocal.class, pk);
             if(labLocal != null){
-                if(listLabLocal == null){listLabLocal = new HashSet<LabLocal>();}
+                if(listLabLocal == null){listLabLocal = new ArrayList<LabLocal>();}
                 listLabLocal.add(labLocal);
+                MenuItem mitem = new MenuItem();
+                mitem.setValue(labLocal.getLocStCodigo());
+//                mitem.setId(labLocal.getLocStCodigo());
+                menuLabLocal.addMenuItem(mitem);
             }
         }
     }
     
     
     public void grabSetorCadastro(ActionEvent event){
-        System.out.println("Indide grabLocalCadastro");
-        if(strLocStCodigo != null
+        System.out.println("Indide grabSetorCadastro");
+        if(strSetStCodigo != null
                 && labUnidadeCadastro != null){
-            labLocal = null;
-            LabLocalPK pk = new LabLocalPK(labUnidadeCadastro.getUniStCodigo(), strLocStCodigo);
-            labLocal = (LabLocal)OracleHelper.getObject(LabLocal.class, pk);
-            if(labLocal != null){
-                if(listLabLocal == null){listLabLocal = new HashSet<LabLocal>();}
-                listLabLocal.add(labLocal);
+            labSetor = null;
+            LabSetorPK pk = new LabSetorPK(labUnidadeCadastro.getUniStCodigo(), strSetStCodigo);
+            labSetor = (LabSetor)OracleHelper.getObject(LabSetor.class, pk);
+            if(labSetor != null){
+                if(listLabSetor == null){listLabSetor = new ArrayList();}
+                listLabSetor.add(labSetor);
+                MenuItem mitem = new MenuItem();
+                mitem.setValue(labSetor.getSetStCodigo());
+//                mitem.setId(labSetor.getSetStCodigo());
+                menuLabSetor.addMenuItem(mitem);
             }
         }
     }
@@ -198,8 +242,12 @@ public class RelatorioBean implements Serializable{
             labExame = null;
             labExame = (LabExame)OracleHelper.getObject(LabExame.class, strExaStCodigo);
             if(labExame != null){
-                if(listLabExame == null){listLabExame = new HashSet<LabExame>();}
+                if(listLabExame == null){listLabExame = new ArrayList<LabExame>();}
                 listLabExame.add(labExame);
+                MenuItem mitem = new MenuItem();
+                mitem.setValue(labExame.getExaStCodigo());
+//                mitem.setId(labExame.getExaStCodigo());
+                menuLabExame.addMenuItem(mitem);
             }
         }
     }
@@ -214,6 +262,9 @@ public class RelatorioBean implements Serializable{
         list.add("tresssssssss");
         return  list;
     }
+    
+    
+    
     
     public boolean isBlCadastro() {
         return blCadastro;
@@ -511,7 +562,7 @@ public class RelatorioBean implements Serializable{
     }
 
     public void setStrLocStCodigo(String strLocStCodigo) {
-        this.strLocStCodigo = ZerosFabrica.makeZeros(strLocStCodigo, 5);
+        this.strLocStCodigo = ZerosFabrica.makeZeros(strLocStCodigo, 6);
     }
 
     public String getStrOptionQuery() {
@@ -527,7 +578,7 @@ public class RelatorioBean implements Serializable{
     }
 
     public void setStrOriStCodigo(String strOriStCodigo) {
-        this.strOriStCodigo = ZerosFabrica.makeZeros(strOriStCodigo, 5);
+        this.strOriStCodigo = ZerosFabrica.makeZeros(strOriStCodigo, 6);
     }
 
     public String getStrSetStCodigo() {
@@ -535,7 +586,7 @@ public class RelatorioBean implements Serializable{
     }
 
     public void setStrSetStCodigo(String strSetStCodigo) {
-        this.strSetStCodigo = strSetStCodigo;
+        this.strSetStCodigo = strSetStCodigo.toUpperCase();
     }
 
     public String getStrUniStCodigoCadastro() {
@@ -576,79 +627,102 @@ public class RelatorioBean implements Serializable{
         return d;
     }
 
-    public Set<LabExame> getListLabExame() {
+    public List<LabExame> getListLabExame() {
         return listLabExame;
     }
 
-    public void setListLabExame(Set<LabExame> listLabExame) {
+    public void setListLabExame(List<LabExame> listLabExame) {
         this.listLabExame = listLabExame;
     }
 
-    public Set<LabExame> getListLabExameSelected() {
+    public List<LabExame> getListLabExameSelected() {
         return listLabExameSelected;
     }
 
-    public void setListLabExameSelected(Set<LabExame> listLabExameSelected) {
+    public void setListLabExameSelected(List<LabExame> listLabExameSelected) {
         this.listLabExameSelected = listLabExameSelected;
     }
 
-    public Set<LabLocal> getListLabLocal() {
+    public List<LabLocal> getListLabLocal() {
         return listLabLocal;
     }
 
-    public void setListLabLocal(Set<LabLocal> listLabLocal) {
+    public void setListLabLocal(List<LabLocal> listLabLocal) {
         this.listLabLocal = listLabLocal;
     }
 
-    public Set<LabLocal> getListLabLocalSelected() {
+    public List<LabLocal> getListLabLocalSelected() {
         return listLabLocalSelected;
     }
 
-    public void setListLabLocalSelected(Set<LabLocal> listLabLocalSelected) {
+    public void setListLabLocalSelected(List<LabLocal> listLabLocalSelected) {
         this.listLabLocalSelected = listLabLocalSelected;
     }
 
-    public Set<LabOrigem> getListLabOrigem() {
+    public List<LabOrigem> getListLabOrigem() {
         return listLabOrigem;
     }
 
-    public void setListLabOrigem(Set<LabOrigem> listLabOrigem) {
+    public void setListLabOrigem(List<LabOrigem> listLabOrigem) {
         this.listLabOrigem = listLabOrigem;
     }
 
-    public Set<LabOrigem> getListLabOrigemSelected() {
-        return listLabOrigemSelected;
-    }
-
-    public void setListLabOrigemSelected(Set<LabOrigem> listLabOrigemSelected) {
-        this.listLabOrigemSelected = listLabOrigemSelected;
-    }
-
-    public Set<LabSetor> getListLabSetor() {
+    public List<LabSetor> getListLabSetor() {
         return listLabSetor;
     }
 
-    public void setListLabSetor(Set<LabSetor> listLabSetor) {
+    public void setListLabSetor(List<LabSetor> listLabSetor) {
         this.listLabSetor = listLabSetor;
     }
 
-    public Set<LabSetor> getListLabSetorSelected() {
+    public List<LabSetor> getListLabSetorSelected() {
         return listLabSetorSelected;
     }
 
-    public void setListLabSetorSelected(Set<LabSetor> listLabSetorSelected) {
+    public void setListLabSetorSelected(List<LabSetor> listLabSetorSelected) {
         this.listLabSetorSelected = listLabSetorSelected;
     }
 
-    public Set<ServicoDocumento> getListServicoDocs() {
+    public List<ServicoDocumento> getListServicoDocs() {
         return listServicoDocs;
     }
 
-    public void setListServicoDocs(Set<ServicoDocumento> listServicoDocs) {
+    public void setListServicoDocs(List<ServicoDocumento> listServicoDocs) {
         this.listServicoDocs = listServicoDocs;
     }
 
-    
+    public MenuModel getMenuLabExame() {
+        return menuLabExame;
+    }
+
+    public void setMenuLabExame(MenuModel menuLabExame) {
+        this.menuLabExame = menuLabExame;
+    }
+
+    public MenuModel getMenuLabLocal() {
+        return menuLabLocal;
+    }
+
+    public void setMenuLabLocal(MenuModel menuLabLocal) {
+        this.menuLabLocal = menuLabLocal;
+    }
+
+    public MenuModel getMenuLabOrigem() {
+        return menuLabOrigem;
+    }
+
+    public void setMenuLabOrigem(MenuModel menuLabOrigem) {
+        this.menuLabOrigem = menuLabOrigem;
+    }
+
+    public MenuModel getMenuLabSetor() {
+        return menuLabSetor;
+    }
+
+    public void setMenuLabSetor(MenuModel menuLabSetor) {
+        this.menuLabSetor = menuLabSetor;
+    }
+
     
 
     

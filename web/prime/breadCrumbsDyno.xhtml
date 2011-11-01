@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.prime.com.tr/ui">
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
         <title>PrimeFaces Sample</title>
         <style type="text/css">
@@ -18,33 +19,16 @@
             }
         </style>
     </h:head>
+    
     <h:body>
-        <h:form id="mainForm" prependId="false">
-            
-            <p:breadCrumb>
-                <ui:repeat value="#{breadCrumbs.items}" var="item">
-                    <p:menuitem   value="#{item.name}">
-<!--                        <p:outputPanel rendered="true">
-                            
-                             #{!item.disabled} 
-                            
-                            <p:commandLink value="#{item.name}" async="true" update="infoPanel"
-                                           actionListener="#{breadCrumbs.updateSelection}" />
-                        </p:outputPanel>
-                        <p:outputPanel rendered="#{item.disabled}">
-                            <p:commandLink value="#{item.name}" styleClass="disabled" onclick="return false"/>
-                        </p:outputPanel>-->
-                    </p:menuitem>
-                </ui:repeat>
-                <p:menuitem  value="Add"  disabled="true"  url="index.html"/>
-<!--                label="Add"-->
-                <p:menuitem value="Delete"  disabled="true"/>
-<!-- label=""-->
-            </p:breadCrumb>
-            <h:panelGroup id="infoPanel" layout="block" style="clear: both; padding: 20px;">
-                <h:outputText value="Current selection: #{breadCrumbs.selection}"/>
-            </h:panelGroup>
+        
+           <h:form id="mainForm" prependId="false">
+           
+                <p:menubar  id="fuckdynomenubar" model="#{breadCrumbs.menuModel}"/>
+
         </h:form>
+        
     </h:body>
+    
 </html>
 
